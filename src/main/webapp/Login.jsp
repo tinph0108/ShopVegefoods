@@ -5,13 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Login</title>
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <link rel="stylesheet" href="css/styleLogin.css">
 </head>
-<body >
+<body>
     <div class="container2" id="container2">
         <div class="form-container sign-up-container">
+        <button style="margin-top: 20px" onclick="window.location.href='index.jsp'">Back To Home</button>
             <form action="#">
                 <h1>Create Account</h1>
                 <div class="social-container">
@@ -27,21 +28,24 @@
             </form>
         </div>
         <div class="form-container sign-in-container">
-            <form action="#">
-                <h1>Sign in</h1>
-                <div class="social-container2">
-                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-                <span>or use your account</span>
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
-                <a href="#">Forgot your password?</a>
-                <button>Sign In</button>
-            </form>
-        </div>
-        <div class="overlay-container">
+			
+				<button style="margin-top: 20px" onclick="window.location.href='index.jsp'">Back To Home</button>
+				
+				<form action="#">
+
+					<h1>Sign in</h1>
+					<div class="social-container2">
+						<a href="#" class="social"><i class="fab fa-facebook-f"></i></a> <a
+							href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+						<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+					</div>
+					<span>or use your account</span> <input type="email"
+						placeholder="Email" /> <input type="password"
+						placeholder="Password" /> <a href="#">Forgot your password?</a>
+					<button>Sign In</button>
+				</form>
+			</div>
+			<div class="overlay-container">
             <div class="overlay">
                 <div class="overlay-panel overlay-left">
                     <h1>Welcome Back!</h1>
@@ -56,18 +60,20 @@
             </div>
         </div>
     </div>
+   
 </body>
-    <script>
-        const signUpButton = document.getElementById('signUp');
-        const signInButton = document.getElementById('signIn');
-        const container = document.getElementById('container2');
+<script>
+    const signUpButton = document.getElementById('signUp');
+    const signInButton = document.getElementById('signIn');
+    const container = document.getElementById('container2');
 
-        signUpButton.addEventListener('click', () => {
-            container.classList.add('right-panel-active');
-        });
+    signUpButton.addEventListener('click', () => {
+        container.classList.add('right-panel-active');
+    });
 
-        signInButton.addEventListener('click', () => {
-            container.classList.remove('right-panel-active');
-        });
-    </script>
+    signInButton.addEventListener('click', () => {
+        container.classList.remove('right-panel-active');
+    });
+</script>
+
 </html>
