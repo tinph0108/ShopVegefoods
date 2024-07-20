@@ -173,4 +173,41 @@ public class ProductDAO {
 		}
 		return false;
 	}
+	
+	
+	public List<Product> getRelatedProducts(String maDanhMuc, String maSP) {
+		List<Product> products = new ArrayList<>();
+		String query = "SELECT * FROM Product WHERE maDanhMuc = ? AND maSP != ?";
+		try (Connection conn = ConnectDB.getConnection(); PreparedStatement ps = conn.prepareStatement(query);) {
+			ps.setString(1, maDanhMuc);
+			ps.setString(2, maSP);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Product product = new Product();
+				product.setMaSP(rs.getString("maSP"));
+				product.setTenSP(rs.getString("tenSP"));
+				product.setGiaBan(rs.getDouble("giaBan"));
+				product.setDonViTinh(rs.getString("donViTinh"));
+				product.setTinhTrang(rs.getString("tinhTrang"));
+				product.setHinh1(rs.getString("hinh1"));
+				product.setMoTa(rs.getString("moTa"));
+				product.setKhoiLuong(rs.getInt("khoiLuong"));
+				product.setSoLuong(rs.getInt("soLuong"));
+				product.setHinh2(rs.getString("hinh2"));
+				product.setHinh3(rs.getString("hinh3"));
+				product.setHinh4(rs.getString("hinh4"));
+
+				// Set danh muc
+				DanhMuc danhMuc = new DanhMucDAO().getDanhMucByMaDM(maDanhMuc);
+				product.setDanhMuc(danhMuc);
+
+				products.add(product);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return products;
+	}
 }
