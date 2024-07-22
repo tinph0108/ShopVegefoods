@@ -46,7 +46,7 @@ public class DanhMucServlet extends HttpServlet {
 		    List<DanhMuc> danhMucs = danhMucDAO.getAllDanhMuc();
 		    request.setAttribute("products", products);
 		    request.setAttribute("categories", danhMucs);
-		    request.getRequestDispatcher("Shop.jsp").forward(request, response);
+		    request.getRequestDispatcher("product").forward(request, response);
 		
 	}
 

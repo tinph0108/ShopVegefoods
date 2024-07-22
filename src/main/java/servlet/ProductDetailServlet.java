@@ -46,10 +46,10 @@ public class ProductDetailServlet extends HttpServlet {
 				request.getRequestDispatcher("ProductSingle.jsp").forward(request, response);
 
 			} else {
-				response.sendRedirect("Shop.jsp");
+				response.sendRedirect("product");
 			}
 		} else {
-			response.sendRedirect("Shop.jsp");
+			response.sendRedirect("product");
 		}
 	}
 

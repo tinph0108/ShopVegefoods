@@ -131,55 +131,102 @@
 .navbar-nav.ml-auto {
 	margin-left: auto;
 }
+#search-results {
+    position: absolute;
+    background: #fff;
+    width: 250px;
+    max-height: 300px;
+    overflow-y: auto;
+    display: none;
+    z-index: 1000;
+    margin-top: 260px;
+    border-radius: 20px;
+   
+}
+#search-results ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border: 2px solid ;
+  
+}
+#search-results ul li {
+    padding: 10px;
+    border-bottom: 2px solid #ccc;
+    display: flex;
+    align-items: center;  
+}
+#search-results ul li:last-child {
+    border-bottom: none;
+}
+#search-results ul li img {
+    width: 30px;  /* Chỉnh lại kích thước ảnh */
+    height: 30px; /* Chỉnh lại kích thước ảnh */
+    margin-right: 10px;
+}
+#search-results ul li a {
+    text-decoration: none;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    
+}
+#search-results ul li a span {
+    font-size: 14px;
+}
+
 </style>
 </head>
 <body class="goto-here">
 
-	<nav
-		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
-		id="ftco-navbar">
-		<div class="container">
-			<a class="navbar-brand" href="index">Vegefoods</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
-				data-target="#ftco-nav" aria-controls="ftco-nav"
-				aria-expanded="false" aria-label="Toggle navigation">
-				<span class="oi oi-menu"></span> Menu
-			</button>
+	 <nav
+        class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
+        id="ftco-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="index">Vegefoods</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#ftco-nav" aria-controls="ftco-nav"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span> Menu
+            </button>
 
-			<div class="collapse navbar-collapse" id="ftco-nav">
-				<ul class="navbar-nav mr-auto">
-					<li class="nav-item active"><a href="index"
-						class="nav-link">Home</a></li>
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#" id="dropdown04"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
-						<div class="dropdown-menu" aria-labelledby="dropdown04">
-							<a class="dropdown-item" href="product">Shop</a> <a
-								class="dropdown-item" href="wishlist.html">Wishlist</a> <a
-								class="dropdown-item" href="ProductSingle.jsp">Single
-								Product</a> <a class="dropdown-item" href="cart">Cart</a> <a
-								class="dropdown-item" href="checkout.html">Checkout</a>
-						</div></li>
-					<li class="nav-item"><a href="About.jsp" class="nav-link">About</a></li>
-					<li class="nav-item"><a href="Blog.jsp" class="nav-link">Blog</a></li>
-					<li class="nav-item"><a href="Contact.jsp" class="nav-link">Contact</a></li>
-				</ul>
-				<form class="form-inline my-2 my-lg-0 mx-auto search-form">
-					<input class="form-control search-input" type="search"
-						placeholder="Bạn muốn chọn ăn gì?" aria-label="Search">
-					<button class="btn search-button" type="submit">
-						<i class="fas fa-search"></i>
-					</button>
-				</form>
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item cta cta-colored"><a href="cart"
-						class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
-					<li class="nav-item"><a href="Login.jsp" class="nav-link"><i
-							class="fas fa-sign-in-alt"></i> Login</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active"><a href="index"
+                        class="nav-link">Home</a></li>
+                    <li class="nav-item dropdown"><a
+                        class="nav-link dropdown-toggle" href="#" id="dropdown04"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown04">
+                            <a class="dropdown-item" href="product">Shop</a> <a
+                                class="dropdown-item" href="wishlist.html">Wishlist</a> <a
+                                class="dropdown-item" href="ProductSingle.jsp">Single
+                                Product</a> <a class="dropdown-item" href="cart">Cart</a> <a
+                                class="dropdown-item" href="checkout.html">Checkout</a>
+                        </div></li>
+                    <li class="nav-item"><a href="About.jsp" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="Blog.jsp" class="nav-link">Blog</a></li>
+                    <li class="nav-item"><a href="Contact.jsp" class="nav-link">Contact</a></li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0 mx-auto search-form" onsubmit="return false;">
+                    <input class="form-control search-input" type="search" id="search-query"
+                        placeholder="Bạn muốn chọn ăn gì?" aria-label="Search" onkeyup="searchProducts()">
+                    <button class="btn search-button" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <div id="search-results">
+                        <ul style="border-radius: 20px;"></ul>
+                    </div>
+                </form>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item cta cta-colored"><a href="cart"
+                        class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+                    <li class="nav-item"><a href="Login.jsp" class="nav-link"><i
+                            class="fas fa-sign-in-alt"></i> Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
 	<!-- END nav -->
 
@@ -520,7 +567,39 @@
 			});
 		});
 	</script>
-
+<script>
+function searchProducts() {
+    var query = document.getElementById("search-query").value;
+    if (query.length > 2) {
+        $.ajax({
+            url: 'ProductIndexServlet',
+            type: 'get',
+            data: { query: query },
+            dataType: 'json',
+            success: function(data) {
+                var searchResults = $('#search-results ul');
+                searchResults.empty();
+                if (data.length > 0) {
+                    data.forEach(function(product) {
+                        searchResults.append(
+                            '<li>' +
+                                '<img src="images/' + product.hinh1 + '" alt="' + product.tenSP + '">' +
+                                '<a href="productDetail?productId=' + product.maSP + '">' +
+                                    '<span>' + product.tenSP + '</span>' +
+                                    '<span>' + product.giaBan + ' VNĐ</span>' +
+                                '</a>' +
+                            '</li>'
+                        );
+                    });
+                    $('#search-results').show();
+                }
+            }
+        });
+    } else {
+        $('#search-results').hide();
+    }
+}
+</script>
 
 
 

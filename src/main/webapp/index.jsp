@@ -142,7 +142,7 @@
 #search-results ul li a span {
     font-size: 14px;
 }
-}
+
 </style>
 </head>
 <body class="goto-here">
