@@ -102,23 +102,27 @@
 #search-results {
     position: absolute;
     background: #fff;
-    border: 1px solid #ccc;
     width: 250px;
     max-height: 300px;
     overflow-y: auto;
     display: none;
     z-index: 1000;
+    margin-top: 260px;
+    border-radius: 20px;
+   
 }
 #search-results ul {
     list-style: none;
     padding: 0;
     margin: 0;
+    border: 2px solid ;
+  
 }
 #search-results ul li {
     padding: 10px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 2px solid #ccc;
     display: flex;
-    align-items: center;
+    align-items: center;  
 }
 #search-results ul li:last-child {
     border-bottom: none;
@@ -133,6 +137,7 @@
     color: #000;
     display: flex;
     flex-direction: column;
+    
 }
 #search-results ul li a span {
     font-size: 14px;
@@ -178,7 +183,7 @@
                         <i class="fas fa-search"></i>
                     </button>
                     <div id="search-results">
-                        <ul></ul>
+                        <ul style="border-radius: 20px;"></ul>
                     </div>
                 </form>
                 <ul class="navbar-nav ml-auto">
@@ -204,9 +209,8 @@
                         data-scrollax-parent="true">
 
                         <div class="col-md-12 ftco-animate text-center">
-                            <h1 class="mb-2">We serve Fresh Vegestables &amp; Fruits</h1>
-                            <h2 class="subheading mb-4">We deliver organic vegetables
-                                &amp; fruits</h2>
+                            <h1 class="mb-2">We serve Fresh Vegestables </h1>
+                            <h2 class="subheading mb-4">We deliver organic vegetables &amp; fruits</h2>
                             <p>
                                 <a href="Shop.jsp" class="btn btn-primary">View Details</a>
                             </p>
@@ -702,9 +706,6 @@ function searchProducts() {
                             '</li>'
                         );
                     });
-                    $('#search-results').show();
-                } else {
-                    searchResults.append('<li>Không có sản phẩm này</li>');
                     $('#search-results').show();
                 }
             }

@@ -32,34 +32,27 @@ public class ProductServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    ProductDAO productDAO = new ProductDAO();
-	    DanhMucDAO danhMucDAO = new DanhMucDAO();
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		ProductDAO productDAO = new ProductDAO();
+		DanhMucDAO danhMucDAO = new DanhMucDAO();
 
-	    String categoryId = request.getParameter("categoryId");
-	    System.out.println("Category ID: " + categoryId);
+		List<Product> products;
+		List<DanhMuc> danhMucs;
+		products = productDAO.getAllProduct();
+		danhMucs = danhMucDAO.getAllDanhMuc();
+//		for (Product product : products) {
+//			System.out.println(product.getTenSP());
+//		}
+//		for (DanhMuc danhMuc : danhMucs) {
+//			System.out.println("Danh mục:" + danhMuc.getTenDanhMuc());
+//		}
 
-	    List<Product> products;
-	    if (categoryId == null || categoryId.equals("all")) {
-	        products = productDAO.getAllProduct();
-	    } else {
-	        products = productDAO.getProductByMaDM(categoryId);
-	    }
+		request.setAttribute("products", products);
+		request.setAttribute("categories", danhMucs);
 
-	    List<DanhMuc> categories = danhMucDAO.getAllDanhMuc();
-	    System.out.println("Products found: " + products.size());
-	    for (Product product : products) {
-	        System.out.println(product.getTenSP());
-	    }
-
-	    request.setAttribute("products", products);
-	    request.setAttribute("categories", categories);
-	    request.setAttribute("selectedCategory", categoryId);
-
-	    request.getRequestDispatcher("Shop.jsp").forward(request, response);
+		request.getRequestDispatcher("Shop.jsp").forward(request, response);
 	}
-
-
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse

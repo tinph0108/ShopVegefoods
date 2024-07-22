@@ -34,18 +34,16 @@
 <link rel="stylesheet" href="css/style.css">
 <style>
 .product-category a {
-	display: inline-block;
-	padding: 10px 20px;
-	border: 1px solid #ddd;
-	background-color: #f8f8f8;
-	color: #333;
-	text-decoration: none;
-	cursor: pointer;
+    display: inline-block;
+    padding: 10px 20px;
+    color: #333;
+    text-decoration: none;
 }
 
 .product-category a.active {
-	background-color: #333;
-	color: #fff;
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
 }
 
 .navbar-nav {
@@ -121,8 +119,7 @@
 
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav mr-auto">
-					<li class="nav-item active"><a href="index"
-						class="nav-link">Home</a></li>
+					<li class="nav-item active"><a href="index" class="nav-link">Home</a></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="dropdown04"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
@@ -175,15 +172,16 @@
 			<div class="row justify-content-center">
 				<div class="col-md-10 mb-5 text-center">
 					<ul class="product-category">
-						<li><a href="#" data-category="all"
-							class="${selectedCategory == null || selectedCategory == 'all' ? 'active' : ''}">All</a></li>
-						<c:forEach var="category" items="${categories}">
-							<li><a href="#" data-category="${category.maDanhMuc}"
-								class="${selectedCategory == category.maDanhMuc ? 'active' : ''}">${category.tenDanhMuc}</a></li>
+						<li><a href="category?maDanhMuc=all"
+							class="${param.maDanhMuc == 'all' || param.maDanhMuc == null ? 'active' : ''}">All</a></li>
+						<c:forEach items="${categories}" var="o">
+							<li><a href="category?maDanhMuc=${o.maDanhMuc}"
+								class="${param.maDanhMuc == o.maDanhMuc ? 'active' : ''}">${o.tenDanhMuc}</a></li>
 						</c:forEach>
 					</ul>
 				</div>
 			</div>
+
 			<div id="product-list" class="row">
 				<c:forEach var="product" items="${products}">
 					<div class="col-md-6 col-lg-3 ftco-animate">
@@ -384,34 +382,6 @@
 	<script src="js/scrollax.min.js"></script>
 	<script src="js/main.js"></script>
 
-	<script>
-		$(document).ready(function() {
-			$('.product-category a').click(function(e) {
-				e.preventDefault();
-				var categoryId = $(this).data('category');
-				$('.product-category a').removeClass('active');
-				$(this).addClass('active');
-				fetchProducts(categoryId);
-			});
 
-			function fetchProducts(categoryId) {
-				$.ajax({
-					url : 'product',
-					type : 'GET',
-					data : {
-						categoryId : categoryId
-					},
-					success : function(data) {
-						console.log(data); // Kiểm tra dữ liệu trả về
-						var newProducts = $(data).find('#product-list').html();
-						$('#product-list').html(newProducts);
-					},
-					error : function() {
-						console.error('Error fetching products');
-					}
-				});
-			}
-		});
-	</script>
 </body>
 </html>

@@ -37,8 +37,18 @@ public class MainTest {
 //        }
 		
 		 // Xóa sản phẩm
-        boolean isDeleted = productDAO.deleteProduct("SP003");
-        System.out.println("Xóa sản phẩm: " + isDeleted);
+//        boolean isDeleted = productDAO.deleteProduct("SP003");
+//        System.out.println("Xóa sản phẩm: " + isDeleted);
+        
+//        List<DanhMuc> listDanhMuc = danhMucDAO.getAllDanhMuc();
+//        for (DanhMuc danhMuc : listDanhMuc) {
+//            System.out.println(danhMuc);
+//        }
+		
+		List<Product> list=productDAO.getProductByMaDM("DM001");
+		for (Product product : list) {
+            System.out.println(product);
+		}
 		
 	}
 }
