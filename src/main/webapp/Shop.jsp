@@ -47,6 +47,63 @@
 	background-color: #333;
 	color: #fff;
 }
+
+.navbar-nav {
+	flex-direction: row;
+}
+
+.navbar-nav .nav-item {
+	margin-left: 10px;
+}
+
+.navbar-nav.mr-auto {
+	margin-right: auto;
+}
+
+.form-inline {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.search-form {
+	display: flex;
+	border: 2px solid #28a745; /* Viền ngoài của toàn bộ thanh tìm kiếm */
+	border-radius: 25px; /* Bo tròn các góc của toàn bộ thanh tìm kiếm */
+	overflow: hidden;
+}
+
+.search-input {
+	width: 250px; /* Chiều ngang */
+	height: 30px; /* Chiều cao */
+	padding: 5px 10px; /* Điều chỉnh padding */
+	font-size: 14px; /* Điều chỉnh kích thước chữ */
+	border: none; /* Loại bỏ viền mặc định */
+	border-radius: 25px 0 0 25px; /* Bo tròn góc trái */
+	outline: none; /* Loại bỏ viền khi focus */
+}
+
+.search-button {
+	height: 30px; /* Chiều cao */
+	padding: 0 15px; /* Điều chỉnh padding */
+	font-size: 16px; /* Điều chỉnh kích thước chữ */
+	border: none; /* Loại bỏ viền mặc định */
+	border-radius: 0 25px 25px 0; /* Bo tròn góc phải */
+	background: none; /* Loại bỏ màu nền */
+	color: #28a745; /* Màu chữ xanh */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer; /* Con trỏ chuột thay đổi khi hover */
+}
+
+.search-button i {
+	font-size: 16px; /* Kích thước biểu tượng */
+}
+
+.navbar-nav.ml-auto {
+	margin-left: auto;
+}
 </style>
 </head>
 <body class="goto-here">
@@ -55,7 +112,7 @@
 		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 		id="ftco-navbar">
 		<div class="container">
-			<a class="navbar-brand" href="index.jsp">Vegefoods</a>
+			<a class="navbar-brand" href="index">Vegefoods</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#ftco-nav" aria-controls="ftco-nav"
 				aria-expanded="false" aria-label="Toggle navigation">
@@ -63,28 +120,40 @@
 			</button>
 
 			<div class="collapse navbar-collapse" id="ftco-nav">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a href="index.jsp" class="nav-link">Home</a></li>
-					<li class="nav-item active dropdown"><a
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active"><a href="index"
+						class="nav-link">Home</a></li>
+					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="dropdown04"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
 						<div class="dropdown-menu" aria-labelledby="dropdown04">
 							<a class="dropdown-item" href="product">Shop</a> <a
 								class="dropdown-item" href="wishlist.html">Wishlist</a> <a
-								class="dropdown-item" href="product-single.html">Single
-								Product</a> <a class="dropdown-item" href="cart.html">Cart</a> <a
+								class="dropdown-item" href="ProductSingle.jsp">Single
+								Product</a> <a class="dropdown-item" href="cart">Cart</a> <a
 								class="dropdown-item" href="checkout.html">Checkout</a>
 						</div></li>
 					<li class="nav-item"><a href="About.jsp" class="nav-link">About</a></li>
 					<li class="nav-item"><a href="Blog.jsp" class="nav-link">Blog</a></li>
 					<li class="nav-item"><a href="Contact.jsp" class="nav-link">Contact</a></li>
-					<li class="nav-item cta cta-colored"><a href="cart.html"
+				</ul>
+				<form class="form-inline my-2 my-lg-0 mx-auto search-form">
+					<input class="form-control search-input" type="search"
+						placeholder="Bạn muốn chọn ăn gì?" aria-label="Search">
+					<button class="btn search-button" type="submit">
+						<i class="fas fa-search"></i>
+					</button>
+				</form>
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item cta cta-colored"><a href="cart"
 						class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
-
+					<li class="nav-item"><a href="Login.jsp" class="nav-link"><i
+							class="fas fa-sign-in-alt"></i> Login</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
+
 	<!-- END nav -->
 
 	<div class="hero-wrap hero-bread"
@@ -94,7 +163,7 @@
 				class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
 					<p class="breadcrumbs">
-						<span class="mr-2"><a href="index.html">Home</a></span> <span>Products</span>
+						<span class="mr-2"><a href="index">Home</a></span> <span>Products</span>
 					</p>
 					<h1 class="mb-0 bread">Products</h1>
 				</div>
@@ -102,76 +171,77 @@
 		</div>
 	</div>
 	<section class="ftco-section">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-10 mb-5 text-center">
-                <ul class="product-category">
-                    <li><a href="#" data-category="all"
-                        class="${selectedCategory == null || selectedCategory == 'all' ? 'active' : ''}">All</a></li>
-                    <c:forEach var="category" items="${categories}">
-                        <li><a href="#" data-category="${category.maDanhMuc}"
-                            class="${selectedCategory == category.maDanhMuc ? 'active' : ''}">${category.tenDanhMuc}</a></li>
-                    </c:forEach>
-                </ul>
-            </div>
-        </div>
-        <div id="product-list" class="row">
-            <c:forEach var="product" items="${products}">
-                <div class="col-md-6 col-lg-3 ftco-animate">
-                    <div class="product">
-                        <a href="productDetail?productId=${product.maSP}" class="img-prod"><img class="img-fluid"
-                            src="images/${product.hinh1}" alt="${product.tenSP}">
-                            <div class="overlay"></div> </a>
-                        <div class="text py-3 pb-4 px-3 text-center">
-                            <h3>
-                                <a href="productDetail?productId=${product.maSP}">${product.tenSP}</a>
-                            </h3>
-                            <div class="d-flex">
-                                <div class="pricing">
-                                    <p class="price">
-                                        <span class="price-sale">${product.giaBan} VNĐ</span>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="bottom-area d-flex px-3">
-                                <div class="m-auto d-flex">
-                                    <a href="productDetail?productId=${product.maSP}"
-                                        class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                                        <span><i class="ion-ios-menu"></i></span>
-                                    </a> <a href="#"
-                                        class="buy-now d-flex justify-content-center align-items-center mx-1">
-                                        <span><i class="ion-ios-cart"></i></span>
-                                    </a> <a href="#"
-                                        class="heart d-flex justify-content-center align-items-center">
-                                        <span><i class="ion-ios-heart"></i></span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </c:forEach>
-        </div>
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-10 mb-5 text-center">
+					<ul class="product-category">
+						<li><a href="#" data-category="all"
+							class="${selectedCategory == null || selectedCategory == 'all' ? 'active' : ''}">All</a></li>
+						<c:forEach var="category" items="${categories}">
+							<li><a href="#" data-category="${category.maDanhMuc}"
+								class="${selectedCategory == category.maDanhMuc ? 'active' : ''}">${category.tenDanhMuc}</a></li>
+						</c:forEach>
+					</ul>
+				</div>
+			</div>
+			<div id="product-list" class="row">
+				<c:forEach var="product" items="${products}">
+					<div class="col-md-6 col-lg-3 ftco-animate">
+						<div class="product">
+							<a href="productDetail?productId=${product.maSP}"
+								class="img-prod"><img class="img-fluid"
+								src="images/${product.hinh1}" alt="${product.tenSP}">
+								<div class="overlay"></div> </a>
+							<div class="text py-3 pb-4 px-3 text-center">
+								<h3>
+									<a href="productDetail?productId=${product.maSP}">${product.tenSP}</a>
+								</h3>
+								<div class="d-flex">
+									<div class="pricing">
+										<p class="price">
+											<span class="price-sale">${product.giaBan} VNĐ</span>
+										</p>
+									</div>
+								</div>
+								<div class="bottom-area d-flex px-3">
+									<div class="m-auto d-flex">
+										<a href="productDetail?productId=${product.maSP}"
+											class="add-to-cart d-flex justify-content-center align-items-center text-center">
+											<span><i class="ion-ios-menu"></i></span>
+										</a> <a href="#"
+											class="buy-now d-flex justify-content-center align-items-center mx-1">
+											<span><i class="ion-ios-cart"></i></span>
+										</a> <a href="#"
+											class="heart d-flex justify-content-center align-items-center">
+											<span><i class="ion-ios-heart"></i></span>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
 
-        <div class="row mt-5">
-            <div class="col text-center">
-                <div class="block-27">
-                    <ul>
-                        <li><a href="#">&lt;</a></li>
-                        <li class="active"><span>1</span></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">&gt;</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-	
-	
+			<div class="row mt-5">
+				<div class="col text-center">
+					<div class="block-27">
+						<ul>
+							<li><a href="#">&lt;</a></li>
+							<li class="active"><span>1</span></li>
+							<li><a href="#">2</a></li>
+							<li><a href="#">3</a></li>
+							<li><a href="#">4</a></li>
+							<li><a href="#">5</a></li>
+							<li><a href="#">&gt;</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
 	<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
 		<div class="container py-4">
 			<div class="row d-flex justify-content-center py-5">
@@ -315,34 +385,33 @@
 	<script src="js/main.js"></script>
 
 	<script>
-	$(document).ready(function() {
-	    $('.product-category a').click(function(e) {
-	        e.preventDefault();
-	        var categoryId = $(this).data('category');
-	        $('.product-category a').removeClass('active');
-	        $(this).addClass('active');
-	        fetchProducts(categoryId);
-	    });
+		$(document).ready(function() {
+			$('.product-category a').click(function(e) {
+				e.preventDefault();
+				var categoryId = $(this).data('category');
+				$('.product-category a').removeClass('active');
+				$(this).addClass('active');
+				fetchProducts(categoryId);
+			});
 
-	    function fetchProducts(categoryId) {
-	        $.ajax({
-	            url: 'product',
-	            type: 'GET',
-	            data: {
-	                categoryId: categoryId
-	            },
-	            success: function(data) {
-	                console.log(data); // Kiểm tra dữ liệu trả về
-	                var newProducts = $(data).find('#product-list').html();
-	                $('#product-list').html(newProducts);
-	            },
-	            error: function() {
-	                console.error('Error fetching products');
-	            }
-	        });
-	    }
-	});
-
+			function fetchProducts(categoryId) {
+				$.ajax({
+					url : 'product',
+					type : 'GET',
+					data : {
+						categoryId : categoryId
+					},
+					success : function(data) {
+						console.log(data); // Kiểm tra dữ liệu trả về
+						var newProducts = $(data).find('#product-list').html();
+						$('#product-list').html(newProducts);
+					},
+					error : function() {
+						console.error('Error fetching products');
+					}
+				});
+			}
+		});
 	</script>
 </body>
 </html>

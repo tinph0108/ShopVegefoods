@@ -4,7 +4,7 @@
 <%@ page import="java.util.List"%>
 <%@ page import="entity.*"%>
 <%@ page import="dao.*"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,82 +38,108 @@
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
- <style>
-        .carousel-control-prev,
-        .carousel-control-next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.5);
-            border: none;
-            border-radius: 50%;
-            color: #fff;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
+<style>
+.carousel-control-prev, .carousel-control-next {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	background-color: rgba(0, 0, 0, 0.5);
+	border: none;
+	border-radius: 50%;
+	color: #fff;
+	width: 40px;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
 
-        .carousel-control-prev {
-            left: -20px;
-        }
+.carousel-control-prev {
+	left: -20px;
+}
 
-        .carousel-control-next {
-            right: -20px;
-        }
+.carousel-control-next {
+	right: -20px;
+}
 
-        .carousel-control-prev-icon,
-        .carousel-control-next-icon {
-            font-size: 20px;
-        }
+.carousel-control-prev-icon, .carousel-control-next-icon {
+	font-size: 20px;
+}
 
-        .owl-carousel .item {
-            position: relative;
-        }
+.owl-carousel .item {
+	position: relative;
+}
 
-        .owl-carousel .item .product {
-            margin: 10px;
-        }
-    </style>
+.owl-carousel .item .product {
+	margin: 10px;
+}
+
+.navbar-nav {
+	flex-direction: row;
+}
+
+.navbar-nav .nav-item {
+	margin-left: 10px;
+}
+
+.navbar-nav.mr-auto {
+	margin-right: auto;
+}
+
+.form-inline {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.search-form {
+	display: flex;
+	border: 2px solid #28a745; /* Viền ngoài của toàn bộ thanh tìm kiếm */
+	border-radius: 25px; /* Bo tròn các góc của toàn bộ thanh tìm kiếm */
+	overflow: hidden;
+}
+
+.search-input {
+	width: 250px; /* Chiều ngang */
+	height: 30px; /* Chiều cao */
+	padding: 5px 10px; /* Điều chỉnh padding */
+	font-size: 14px; /* Điều chỉnh kích thước chữ */
+	border: none; /* Loại bỏ viền mặc định */
+	border-radius: 25px 0 0 25px; /* Bo tròn góc trái */
+	outline: none; /* Loại bỏ viền khi focus */
+}
+
+.search-button {
+	height: 30px; /* Chiều cao */
+	padding: 0 15px; /* Điều chỉnh padding */
+	font-size: 16px; /* Điều chỉnh kích thước chữ */
+	border: none; /* Loại bỏ viền mặc định */
+	border-radius: 0 25px 25px 0; /* Bo tròn góc phải */
+	background: none; /* Loại bỏ màu nền */
+	color: #28a745; /* Màu chữ xanh */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer; /* Con trỏ chuột thay đổi khi hover */
+}
+
+.search-button i {
+	font-size: 16px; /* Kích thước biểu tượng */
+}
+
+.navbar-nav.ml-auto {
+	margin-left: auto;
+}
+</style>
 </head>
 <body class="goto-here">
-	<div class="py-1 bg-primary">
-		<div class="container">
-			<div
-				class="row no-gutters d-flex align-items-start align-items-center px-md-0">
-				<div class="col-lg-12 d-block">
-					<div class="row d-flex">
-						<div class="col-md pr-4 d-flex topper align-items-center">
-							<div
-								class="icon mr-2 d-flex justify-content-center align-items-center">
-								<span class="icon-phone2"></span>
-							</div>
-							<span class="text">+ 1235 2355 98</span>
-						</div>
-						<div class="col-md pr-4 d-flex topper align-items-center">
-							<div
-								class="icon mr-2 d-flex justify-content-center align-items-center">
-								<span class="icon-paper-plane"></span>
-							</div>
-							<span class="text">youremail@email.com</span>
-						</div>
-						<div
-							class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
-							<span class="text">3-5 Business days delivery &amp; Free
-								Returns</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+
 	<nav
 		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 		id="ftco-navbar">
 		<div class="container">
-			<a class="navbar-brand" href="index.html">Vegefoods</a>
+			<a class="navbar-brand" href="index">Vegefoods</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#ftco-nav" aria-controls="ftco-nav"
 				aria-expanded="false" aria-label="Toggle navigation">
@@ -121,28 +147,40 @@
 			</button>
 
 			<div class="collapse navbar-collapse" id="ftco-nav">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-					<li class="nav-item active dropdown"><a
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active"><a href="index"
+						class="nav-link">Home</a></li>
+					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="dropdown04"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
 						<div class="dropdown-menu" aria-labelledby="dropdown04">
-							<a class="dropdown-item" href="shop.html">Shop</a> <a
+							<a class="dropdown-item" href="product">Shop</a> <a
 								class="dropdown-item" href="wishlist.html">Wishlist</a> <a
-								class="dropdown-item" href="product-single.html">Single
-								Product</a> <a class="dropdown-item" href="cart.html">Cart</a> <a
+								class="dropdown-item" href="ProductSingle.jsp">Single
+								Product</a> <a class="dropdown-item" href="cart">Cart</a> <a
 								class="dropdown-item" href="checkout.html">Checkout</a>
 						</div></li>
-					<li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-					<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-					<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-					<li class="nav-item cta cta-colored"><a href="cart.html"
+					<li class="nav-item"><a href="About.jsp" class="nav-link">About</a></li>
+					<li class="nav-item"><a href="Blog.jsp" class="nav-link">Blog</a></li>
+					<li class="nav-item"><a href="Contact.jsp" class="nav-link">Contact</a></li>
+				</ul>
+				<form class="form-inline my-2 my-lg-0 mx-auto search-form">
+					<input class="form-control search-input" type="search"
+						placeholder="Bạn muốn chọn ăn gì?" aria-label="Search">
+					<button class="btn search-button" type="submit">
+						<i class="fas fa-search"></i>
+					</button>
+				</form>
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item cta cta-colored"><a href="cart"
 						class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
-
+					<li class="nav-item"><a href="Login.jsp" class="nav-link"><i
+							class="fas fa-sign-in-alt"></i> Login</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
+
 	<!-- END nav -->
 
 	<div class="hero-wrap hero-bread"
@@ -152,7 +190,7 @@
 				class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
 					<p class="breadcrumbs">
-						<span class="mr-2"><a href="index.html">Home</a></span> <span
+						<span class="mr-2"><a href="index">Home</a></span> <span
 							class="mr-2"><a href="index.html">Product</a></span> <span>Product
 							Single</span>
 					</p>
@@ -163,112 +201,128 @@
 	</div>
 
 	<section class="ftco-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 mb-5 ftco-animate">
-                <a href="images/${product.hinh1}" class="image-popup"><img src="images/${product.hinh1}" class="img-fluid" alt="${product.tenSP}"></a>
-            </div>
-            <div class="col-lg-6 product-details pl-md-5 ftco-animate">
-                <h3>${product.tenSP}</h3>
-                <div class="rating d-flex">
-                    <p class="text-left mr-4">
-                        <a href="#" class="mr-2">5.0</a>
-                        <a href="#"><span class="ion-ios-star-outline"></span></a>
-                        <a href="#"><span class="ion-ios-star-outline"></span></a>
-                        <a href="#"><span class="ion-ios-star-outline"></span></a>
-                        <a href="#"><span class="ion-ios-star-outline"></span></a>
-                        <a href="#"><span class="ion-ios-star-outline"></span></a>
-                    </p>
-                    <p class="text-left mr-4">
-                        <a href="#" class="mr-2" style="color: #000;">100 <span style="color: #bbb;">Rating</span></a>
-                    </p>
-                    <p class="text-left">
-                        <a href="#" class="mr-2" style="color: #000;">500 <span style="color: #bbb;">Sold</span></a>
-                    </p>
-                </div>
-                <p class="price"><span>${product.giaBan} VNĐ</span></p>
-               
-                <p>${product.moTa}</p>
-                <div class="row mt-4">
-                
-                    <div class="w-100"></div>
-                    <div class="input-group col-md-6 d-flex mb-3">
-                        <span class="input-group-btn mr-2">
-                            <button type="button" class="quantity-left-minus btn"  data-type="minus" data-field="">
-                                <i class="ion-ios-remove"></i>
-                            </button>
-                        </span>
-                        <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="100">
-                        <span class="input-group-btn ml-2">
-                            <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
-                                <i class="ion-ios-add"></i>
-                            </button>
-                        </span>
-                    </div>
-                    <div class="w-100"></div>
-                    <div class="col-md-12">
-                        <p style="color: #000;">${product.soLuong} available</p>
-                    </div>
-                </div>
-                <p><a href="cart.html" class="btn btn-black py-3 px-5">Add to Cart</a></p>
-            </div>
-        </div>
-    </div>
-</section>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 mb-5 ftco-animate">
+					<a href="images/${product.hinh1}" class="image-popup"><img
+						src="images/${product.hinh1}" class="img-fluid"
+						alt="${product.tenSP}"></a>
+				</div>
+				<div class="col-lg-6 product-details pl-md-5 ftco-animate">
+					<h3>${product.tenSP}</h3>
+					<div class="rating d-flex">
+						<p class="text-left mr-4">
+							<a href="#" class="mr-2">5.0</a> <a href="#"><span
+								class="ion-ios-star-outline"></span></a> <a href="#"><span
+								class="ion-ios-star-outline"></span></a> <a href="#"><span
+								class="ion-ios-star-outline"></span></a> <a href="#"><span
+								class="ion-ios-star-outline"></span></a> <a href="#"><span
+								class="ion-ios-star-outline"></span></a>
+						</p>
+						<p class="text-left mr-4">
+							<a href="#" class="mr-2" style="color: #000;">100 <span
+								style="color: #bbb;">Rating</span></a>
+						</p>
+						<p class="text-left">
+							<a href="#" class="mr-2" style="color: #000;">500 <span
+								style="color: #bbb;">Sold</span></a>
+						</p>
+					</div>
+					<p class="price">
+						<span>${product.giaBan} VNĐ</span>
+					</p>
 
-<section class="ftco-section">
-    <div class="container">
-        <div class="row justify-content-center mb-3 pb-3">
-            <div class="col-md-12 heading-section text-center ftco-animate">
-                <span class="subheading">Products</span>
-                <h2 class="mb-4">Related Products</h2>
-            </div>
-        </div>
-        <div class="container position-relative">
-            <div class="owl-carousel owl-theme">
-                <c:forEach var="relatedProduct" items="${relatedProducts}">
-                    <div class="item">
-                        <div class="product">
-                            <a href="productDetail?productId=${relatedProduct.maSP}" class="img-prod">
-                                <img class="img-fluid" src="images/${relatedProduct.hinh1}" alt="${relatedProduct.tenSP}">
-                                <div class="overlay"></div>
-                            </a>
-                            <div class="text py-3 pb-4 px-3 text-center">
-                                <h3><a href="productDetail?productId=${relatedProduct.maSP}">${relatedProduct.tenSP}</a></h3>
-                                <div class="d-flex">
-                                    <div class="pricing">
-                                        <p class="price">
-                                            <span>${relatedProduct.giaBan} VNĐ</span>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="bottom-area d-flex px-3">
-                                    <div class="m-auto d-flex">
-                                        <a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                                            <span><i class="ion-ios-menu"></i></span>
-                                        </a> 
-                                        <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-                                            <span><i class="ion-ios-cart"></i></span>
-                                        </a> 
-                                        <a href="#" class="heart d-flex justify-content-center align-items-center">
-                                            <span><i class="ion-ios-heart"></i></span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </c:forEach>
-            </div>
-            <button class="carousel-control-prev" type="button">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            </button>
-            <button class="carousel-control-next" type="button">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            </button>
-        </div>
-    </div>
-</section>
+					<p>${product.moTa}</p>
+					<div class="row mt-4">
+
+						<div class="w-100"></div>
+						<div class="input-group col-md-6 d-flex mb-3">
+							<span class="input-group-btn mr-2">
+								<button type="button" class="quantity-left-minus btn"
+									data-type="minus" data-field="">
+									<i class="ion-ios-remove"></i>
+								</button>
+							</span> <input type="text" id="quantity" name="quantity"
+								class="form-control input-number" value="1" min="1" max="100">
+							<span class="input-group-btn ml-2">
+								<button type="button" class="quantity-right-plus btn"
+									data-type="plus" data-field="">
+									<i class="ion-ios-add"></i>
+								</button>
+							</span>
+						</div>
+						<div class="w-100"></div>
+						<div class="col-md-12">
+							<p style="color: #000;">Số lượng còn lại: ${product.soLuong}</p>
+						</div>
+					</div>
+					<p>
+						<a href="cart.html" class="btn btn-black py-3 px-5">Add to
+							Cart</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center mb-3 pb-3">
+				<div class="col-md-12 heading-section text-center ftco-animate">
+					<span class="subheading">Products</span>
+					<h2 class="mb-4">Related Products</h2>
+				</div>
+			</div>
+			<div class="container position-relative">
+				<div class="owl-carousel owl-theme">
+					<c:forEach var="relatedProduct" items="${relatedProducts}">
+						<div class="item">
+							<div class="product">
+								<a href="productDetail?productId=${relatedProduct.maSP}"
+									class="img-prod"> <img class="img-fluid"
+									src="images/${relatedProduct.hinh1}"
+									alt="${relatedProduct.tenSP}">
+									<div class="overlay"></div>
+								</a>
+								<div class="text py-3 pb-4 px-3 text-center">
+									<h3>
+										<a href="productDetail?productId=${relatedProduct.maSP}">${relatedProduct.tenSP}</a>
+									</h3>
+									<div class="d-flex">
+										<div class="pricing">
+											<p class="price">
+												<span>${relatedProduct.giaBan} VNĐ</span>
+											</p>
+										</div>
+									</div>
+									<div class="bottom-area d-flex px-3">
+										<div class="m-auto d-flex">
+											<a href="#"
+												class="add-to-cart d-flex justify-content-center align-items-center text-center">
+												<span><i class="ion-ios-menu"></i></span>
+											</a> <a href="#"
+												class="buy-now d-flex justify-content-center align-items-center mx-1">
+												<span><i class="ion-ios-cart"></i></span>
+											</a> <a href="#"
+												class="heart d-flex justify-content-center align-items-center">
+												<span><i class="ion-ios-heart"></i></span>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+				<button class="carousel-control-prev" type="button">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				</button>
+				<button class="carousel-control-next" type="button">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				</button>
+			</div>
+		</div>
+	</section>
 
 
 
@@ -308,15 +362,16 @@
 				<div class="col-md">
 					<div class="ftco-footer-widget mb-4">
 						<h2 class="ftco-heading-2">Vegefoods</h2>
-						<p>Far far away, behind the word mountains, far from the
-							countries Vokalia and Consonantia.</p>
+						<p>Rau sạch, tươi ngon từ trang trại đến bàn ăn của bạn!</p>
 						<ul
 							class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
 							<li class="ftco-animate"><a href="#"><span
 									class="icon-twitter"></span></a></li>
-							<li class="ftco-animate"><a href="#"><span
+							<li class="ftco-animate"><a
+								href="https://www.facebook.com/sniT.18"><span
 									class="icon-facebook"></span></a></li>
-							<li class="ftco-animate"><a href="#"><span
+							<li class="ftco-animate"><a
+								href="https://www.instagram.com/s1mpel8"><span
 									class="icon-instagram"></span></a></li>
 						</ul>
 					</div>
@@ -325,8 +380,8 @@
 					<div class="ftco-footer-widget mb-4 ml-md-5">
 						<h2 class="ftco-heading-2">Menu</h2>
 						<ul class="list-unstyled">
-							<li><a href="#" class="py-2 d-block">Shop</a></li>
-							<li><a href="#" class="py-2 d-block">About</a></li>
+							<li><a href="Shop.jsp" class="py-2 d-block">Shop</a></li>
+							<li><a href="About.jsp" class="py-2 d-block">About</a></li>
 							<li><a href="#" class="py-2 d-block">Journal</a></li>
 							<li><a href="#" class="py-2 d-block">Contact Us</a></li>
 						</ul>
@@ -358,12 +413,12 @@
 						<div class="block-23 mb-3">
 							<ul>
 								<li><span class="icon icon-map-marker"></span><span
-									class="text">203 Fake St. Mountain View, San Francisco,
-										California, USA</span></li>
+									class="text">12 Nguyễn Văn Bảo, Phường 4, Gò Vấp, Hồ Chí
+										Minh</span></li>
 								<li><a href="#"><span class="icon icon-phone"></span><span
-										class="text">+2 392 3929 210</span></a></li>
+										class="text">+84 327 858 843</span></a></li>
 								<li><a href="#"><span class="icon icon-envelope"></span><span
-										class="text">info@yourdomain.com</span></a></li>
+										class="text">tinphan924@gmail.com</span></a></li>
 							</ul>
 						</div>
 					</div>
@@ -387,7 +442,6 @@
 			</div>
 		</div>
 	</footer>
-
 
 
 	<!-- loader -->
@@ -420,52 +474,52 @@
 
 
 	<script>
-	$(document).ready(function() {
-	    var quantitiy = 0;
-	    $('.quantity-right-plus').click(function(e) {
-	        e.preventDefault();
-	        var quantity = parseInt($('#quantity').val());
-	        $('#quantity').val(quantity + 1);
-	    });
+		$(document).ready(function() {
+			var quantitiy = 0;
+			$('.quantity-right-plus').click(function(e) {
+				e.preventDefault();
+				var quantity = parseInt($('#quantity').val());
+				$('#quantity').val(quantity + 1);
+			});
 
-	    $('.quantity-left-minus').click(function(e) {
-	        e.preventDefault();
-	        var quantity = parseInt($('#quantity').val());
-	        if (quantity > 1) {
-	            $('#quantity').val(quantity - 1);
-	        }
-	    });
-	});
+			$('.quantity-left-minus').click(function(e) {
+				e.preventDefault();
+				var quantity = parseInt($('#quantity').val());
+				if (quantity > 1) {
+					$('#quantity').val(quantity - 1);
+				}
+			});
+		});
 	</script>
-<script>
-    $(document).ready(function(){
-        var owl = $(".owl-carousel");
-        owl.owlCarousel({
-            loop: true,
-            margin: 10,
-            nav: false,
-            responsive:{
-                0:{
-                    items:1
-                },
-                600:{
-                    items:2
-                },
-                1000:{
-                    items:4
-                }
-            }
-        });
+	<script>
+		$(document).ready(function() {
+			var owl = $(".owl-carousel");
+			owl.owlCarousel({
+				loop : true,
+				margin : 10,
+				nav : false,
+				responsive : {
+					0 : {
+						items : 1
+					},
+					600 : {
+						items : 2
+					},
+					1000 : {
+						items : 4
+					}
+				}
+			});
 
-        $(".carousel-control-next").click(function() {
-            owl.trigger('next.owl.carousel');
-        });
+			$(".carousel-control-next").click(function() {
+				owl.trigger('next.owl.carousel');
+			});
 
-        $(".carousel-control-prev").click(function() {
-            owl.trigger('prev.owl.carousel');
-        });
-    });
-</script>
+			$(".carousel-control-prev").click(function() {
+				owl.trigger('prev.owl.carousel');
+			});
+		});
+	</script>
 
 
 

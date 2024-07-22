@@ -210,4 +210,77 @@ public class ProductDAO {
 
 		return products;
 	}
+	
+	// Viết hàm lấy 8 sản phẩm ngẫu nhiên
+	public List<Product> getRandomProducts() {
+		List<Product> products = new ArrayList<>();
+		String query = "SELECT TOP 8 * FROM Product ORDER BY NEWID()";
+		try (Connection conn = ConnectDB.getConnection(); PreparedStatement ps = conn.prepareStatement(query);) {
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Product product = new Product();
+				product.setMaSP(rs.getString("maSP"));
+				product.setTenSP(rs.getString("tenSP"));
+				product.setGiaBan(rs.getDouble("giaBan"));
+				product.setDonViTinh(rs.getString("donViTinh"));
+				product.setTinhTrang(rs.getString("tinhTrang"));
+				product.setHinh1(rs.getString("hinh1"));
+				product.setMoTa(rs.getString("moTa"));
+				product.setKhoiLuong(rs.getInt("khoiLuong"));
+				product.setSoLuong(rs.getInt("soLuong"));
+				product.setHinh2(rs.getString("hinh2"));
+				product.setHinh3(rs.getString("hinh3"));
+				product.setHinh4(rs.getString("hinh4"));
+
+				// Set danh muc
+				String maDanhMuc = rs.getString("maDanhMuc");
+				DanhMuc danhMuc = new DanhMucDAO().getDanhMucByMaDM(maDanhMuc);
+				product.setDanhMuc(danhMuc);
+
+				products.add(product);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return products;
+	}
+	
+	// tìm kiếm danh sách sản phẩm
+	public List<Product> searchProducts(String search) {
+		List<Product> products = new ArrayList<>();
+		String query = "SELECT * FROM Product WHERE tenSP LIKE ?";
+		try (Connection conn = ConnectDB.getConnection(); PreparedStatement ps = conn.prepareStatement(query);) {
+			ps.setString(1, "%" + search + "%");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Product product = new Product();
+				product.setMaSP(rs.getString("maSP"));
+				product.setTenSP(rs.getString("tenSP"));
+				product.setGiaBan(rs.getDouble("giaBan"));
+				product.setDonViTinh(rs.getString("donViTinh"));
+				product.setTinhTrang(rs.getString("tinhTrang"));
+				product.setHinh1(rs.getString("hinh1"));
+				product.setMoTa(rs.getString("moTa"));
+				product.setKhoiLuong(rs.getInt("khoiLuong"));
+				product.setSoLuong(rs.getInt("soLuong"));
+				product.setHinh2(rs.getString("hinh2"));
+				product.setHinh3(rs.getString("hinh3"));
+				product.setHinh4(rs.getString("hinh4"));
+
+				// Set danh muc
+				String maDanhMuc = rs.getString("maDanhMuc");
+				DanhMuc danhMuc = new DanhMucDAO().getDanhMucByMaDM(maDanhMuc);
+				product.setDanhMuc(danhMuc);
+
+				products.add(product);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return products;
+	}
 }
