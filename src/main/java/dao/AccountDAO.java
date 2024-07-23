@@ -91,4 +91,37 @@ public class AccountDAO {
             e.printStackTrace();
         }
     }
+    
+
+	public Account getAccount(String uID) {
+        String query = "SELECT * FROM Account WHERE uID = ?";
+        try (Connection conn = ConnectDB.getConnection(); PreparedStatement ps = conn.prepareStatement(query);) {
+            ps.setString(1, uID);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Account account = new Account();
+                account.setuID(rs.getString("uID"));
+                account.setEmail(rs.getString("email"));
+                account.setPassword(rs.getString("password"));
+                account.setSell(rs.getBoolean("isSell"));
+                account.setAdmin(rs.getBoolean("isAdmin"));
+                return account;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+		return null;
+	}
+	
+	public void updatePassword(String email, String password) {
+		String query = "UPDATE Account SET password = ? WHERE email = ?";
+		try (Connection conn = ConnectDB.getConnection(); PreparedStatement ps = conn.prepareStatement(query);) {
+			ps.setString(1, password);
+			ps.setString(2, email);
+			ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 }

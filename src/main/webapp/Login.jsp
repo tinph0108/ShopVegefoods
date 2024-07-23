@@ -45,7 +45,7 @@
 				<p class="text-danger" style="color: red;">${message}</p>
 				<input name="email" type="email" placeholder="Email" /> 
 				<input name="password" type="password" placeholder="Password" /> 
-				<a href="#">Forgot your password?</a>
+				<a href="requestPassword.jsp">Forgot your password?</a>
 				<button type="submit">Sign In</button>
 			</form>
 		</div>
