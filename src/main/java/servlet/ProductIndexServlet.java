@@ -12,6 +12,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class ProductIndexServlet
@@ -32,21 +33,27 @@ public class ProductIndexServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 String query = request.getParameter("query");
-	        ProductDAO productDAO = new ProductDAO();
-	        List<Product> products;
+		String query = request.getParameter("query");
+	    ProductDAO productDAO = new ProductDAO();
+	    List<Product> products;
 
-	        if (query != null && !query.isEmpty()) {
-	            products = productDAO.searchProducts(query);
-	            response.setContentType("application/json");
-	            response.setCharacterEncoding("UTF-8");
-	            String json = new Gson().toJson(products);
-	            response.getWriter().write(json);
+	    if (query != null && !query.isEmpty()) {
+	        products = productDAO.searchProducts(query);
+	        response.setContentType("application/json");
+	        response.setCharacterEncoding("UTF-8");
+	        String json = new Gson().toJson(products);
+	        response.getWriter().write(json);
+	    } else {
+	        products = productDAO.getRandomProducts();
+	        request.setAttribute("products", products);
+	        
+	        HttpSession session = request.getSession();
+	        if (session != null && session.getAttribute("acc") != null) {
+	            request.getRequestDispatcher("indexLogin.jsp").forward(request, response);
 	        } else {
-	            products = productDAO.getRandomProducts();
-	            request.setAttribute("products", products);
 	            request.getRequestDispatcher("index.jsp").forward(request, response);
 	        }
+	    }
 	}
 
 	/**

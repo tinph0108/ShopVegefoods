@@ -9,6 +9,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class SignUpServlet
@@ -45,18 +46,26 @@ public class SignUpServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		String repassword = request.getParameter("repassword");
 		if (!password.equals(repassword)) {
-			response.sendRedirect("Login.jsp");
+			request.setAttribute("message2", "Passwords do not match");
+			request.getRequestDispatcher("Login.jsp").forward(request, response);
 		} else {
 			AccountDAO accountDAO = new AccountDAO();
 			Account account = accountDAO.checkAccountExist(email);
 			if (account == null) {
 				accountDAO.signUp(email, password);
-				response.sendRedirect("index");
-				
+				Account acc = accountDAO.login(email, password);
+				if (acc != null) {
+					HttpSession session = request.getSession();
+					session.setAttribute("acc", acc);
+					session.setMaxInactiveInterval(10 * 60);
+					response.sendRedirect("index");
+				} else {
+					response.sendRedirect("Login.jsp");
+				}
 			} else {
-				response.sendRedirect("Login.jsp");
+				request.setAttribute("alertMessage", "Account already exists");
+				request.getRequestDispatcher("Login.jsp").forward(request, response);
 			}
 		}
 	}
-
 }

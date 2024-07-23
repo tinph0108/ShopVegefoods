@@ -4,12 +4,14 @@ import java.io.IOException;
 import java.util.List;
 
 import dao.ProductDAO;
+import entity.Account;
 import entity.Product;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class ProductDetailServlet
@@ -31,27 +33,32 @@ public class ProductDetailServlet extends HttpServlet {
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String productId = request.getParameter("productId");
-		if (productId != null) {
-			ProductDAO productDAO = new ProductDAO();
-			Product product = productDAO.getProductByMaSP(productId);
-			List<Product> relatedProducts = productDAO.getRelatedProducts(product.getDanhMuc().getMaDanhMuc(),
-					productId);
+            throws ServletException, IOException {
+        String productId = request.getParameter("productId");
+        HttpSession session = request.getSession();
+        Account account = (Account) session.getAttribute("acc");
+        
+        if (productId != null) {
+            ProductDAO productDAO = new ProductDAO();
+            Product product = productDAO.getProductByMaSP(productId);
+            List<Product> relatedProducts = productDAO.getRelatedProducts(product.getDanhMuc().getMaDanhMuc(),
+                    productId);
 
-			if (product != null) {
-				request.setAttribute("product", product);
-				request.setAttribute("relatedProducts", relatedProducts);
-
-				request.getRequestDispatcher("ProductSingle.jsp").forward(request, response);
-
-			} else {
-				response.sendRedirect("product");
-			}
-		} else {
-			response.sendRedirect("product");
-		}
-	}
+            if (product != null) {
+                request.setAttribute("product", product);
+                request.setAttribute("relatedProducts", relatedProducts);
+                if (account != null) {
+                    request.getRequestDispatcher("ProductSingle.jsp").forward(request, response);
+                } else {
+                    request.getRequestDispatcher("ProductSingle.jsp").forward(request, response);
+                }
+            } else {
+                response.sendRedirect("product");
+            }
+        } else {
+            response.sendRedirect("product");
+        }
+    }
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse

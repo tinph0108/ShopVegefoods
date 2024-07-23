@@ -2,10 +2,7 @@ package servlet;
 
 import java.io.IOException;
 
-import dao.AccountDAO;
-import entity.Account;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.ServletRequest;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,16 +10,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class LogOutServlet
  */
-@WebServlet({ "/LoginServlet", "/login" })
-public class LoginServlet extends HttpServlet {
+@WebServlet({ "/LogOutServlet", "/logout" })
+public class LogOutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public LogOutServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,28 +28,17 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		HttpSession session = request.getSession();
+		session.removeAttribute("acc");
+		response.sendRedirect("index");
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String username = request.getParameter("email");
-		String password = request.getParameter("password");
-		AccountDAO accountDAO = new AccountDAO();
-		Account account = accountDAO.login(username, password);
-		if (account == null) {
-			request.setAttribute("message", "Invalid email or password");
-			request.getRequestDispatcher("Login.jsp").forward(request, response);
-		} else {
-			HttpSession session = request.getSession();
-			session.setAttribute("acc", account);
-			session.setMaxInactiveInterval(10*60);
-			response.sendRedirect("index");
-			
-		}
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }
