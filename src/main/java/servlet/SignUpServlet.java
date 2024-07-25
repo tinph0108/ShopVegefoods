@@ -3,6 +3,7 @@ package servlet;
 import java.io.IOException;
 
 import dao.AccountDAO;
+import dao.EmailUtil;
 import entity.Account;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -58,6 +59,15 @@ public class SignUpServlet extends HttpServlet {
 					HttpSession session = request.getSession();
 					session.setAttribute("acc", acc);
 					session.setMaxInactiveInterval(10 * 60);
+					
+					// Gửi email thông báo đăng ký thành công
+					String subject = "Đăng ký thành công tại Vegefoods";
+					String content = "Chào mừng bạn đến với Vegefoods!\n\n" +
+									 "Cảm ơn bạn đã đăng ký tài khoản tại Vegefoods. Chúng tôi hy vọng bạn sẽ có những trải nghiệm tuyệt vời khi mua sắm tại đây.\n\n" +
+									 "Trân trọng,\n" +
+									 "Đội ngũ Vegefoods";
+					EmailUtil.sendEmail(email, subject, content);
+
 					response.sendRedirect("index");
 				} else {
 					response.sendRedirect("Login.jsp");

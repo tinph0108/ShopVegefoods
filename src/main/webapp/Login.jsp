@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,6 +43,9 @@
 					<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
 				</div>
 				<span>or use your account</span>
+				 <c:if test="${not empty alertMessage}">
+                            <div class="alert alert-danger">${alertMessage}</div>
+                        </c:if>
 				<p class="text-danger" style="color: red;">${message}</p>
 				<input name="email" type="email" placeholder="Email" /> 
 				<input name="password" type="password" placeholder="Password" /> 
