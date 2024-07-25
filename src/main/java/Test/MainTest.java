@@ -45,10 +45,12 @@ public class MainTest {
 //            System.out.println(danhMuc);
 //        }
 		
-		List<Product> list=productDAO.getProductByMaDM("DM001");
-		for (Product product : list) {
-            System.out.println(product);
-		}
+//		List<Product> list=productDAO.getProductByMaDM("DM001");
+//		for (Product product : list) {
+//            System.out.println(product);
+//		}
+		
+		
 		
 	}
 }

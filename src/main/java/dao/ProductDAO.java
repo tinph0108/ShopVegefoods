@@ -30,6 +30,7 @@ public class ProductDAO {
 				product.setHinh2(rs.getString("hinh2"));
 				product.setHinh3(rs.getString("hinh3"));
 				product.setHinh4(rs.getString("hinh4"));
+				product.setAccount(new AccountDAO().getAccount(rs.getString("sell_ID")));
 
 				// Set danh muc
 				String maDanhMuc = rs.getString("maDanhMuc");
@@ -65,6 +66,7 @@ public class ProductDAO {
 				product.setHinh2(rs.getString("hinh2"));
 				product.setHinh3(rs.getString("hinh3"));
 				product.setHinh4(rs.getString("hinh4"));
+				product.setAccount(new AccountDAO().getAccount(rs.getString("sell_ID")));
 
 				// Set danh muc
 				String maDanhMuc = rs.getString("maDanhMuc");
@@ -101,6 +103,7 @@ public class ProductDAO {
 				product.setHinh2(rs.getString("hinh2"));
 				product.setHinh3(rs.getString("hinh3"));
 				product.setHinh4(rs.getString("hinh4"));
+				product.setAccount(new AccountDAO().getAccount(rs.getString("sell_ID")));
 
 				// Set danh muc
 				DanhMuc danhMuc = new DanhMucDAO().getDanhMucByMaDM(maDanhMuc);
@@ -117,7 +120,7 @@ public class ProductDAO {
 	}
 
 	public boolean insertProduct(Product product) {
-		String query = "INSERT INTO Product  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String query = "INSERT INTO Product  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		try (Connection conn = ConnectDB.getConnection(); PreparedStatement ps = conn.prepareStatement(query);) {
 			ps.setString(1, product.getMaSP());
 			ps.setString(2, product.getTenSP());
@@ -132,6 +135,7 @@ public class ProductDAO {
 			ps.setString(11, product.getHinh2());
 			ps.setString(12, product.getHinh3());
 			ps.setString(13, product.getHinh4());
+			ps.setString(14, product.getAccount().getuID());
 			return ps.executeUpdate() > 0;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -139,7 +143,78 @@ public class ProductDAO {
 
 		}
 	}
+	
+	public void insertProduct(String maSP, String tenSP, double giaBan, String donViTinh, String tinhTrang, String maDanhMuc, String hinh1, String moTa, int khoiLuong, int soLuong, String hinh2, String hinh3, String hinh4, String sell_ID) {
+        String query = "INSERT INTO Product VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        try (Connection conn = ConnectDB.getConnection(); PreparedStatement ps = conn.prepareStatement(query);) {
+            ps.setString(1, maSP);
+            ps.setString(2, tenSP);
+            ps.setDouble(3, giaBan);
+            ps.setString(4, donViTinh);
+            ps.setString(5, tinhTrang);
+            ps.setString(6, maDanhMuc);
+            ps.setString(7, hinh1);
+            ps.setString(8, moTa);
+            ps.setInt(9, khoiLuong);
+            ps.setInt(10, soLuong);
+            ps.setString(11, hinh2);
+            ps.setString(12, hinh3);
+            ps.setString(13, hinh4);
+            ps.setString(14, sell_ID);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+	}
+	
+	
+	public String getMaxProductID() {
+	    String query = "SELECT MAX(maSP) FROM Product";
+	    try (Connection conn = ConnectDB.getConnection(); PreparedStatement ps = conn.prepareStatement(query); ResultSet rs = ps.executeQuery()) {
+	        if (rs.next()) {
+	            return rs.getString(1);
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return null;
+	}
 
+	public String generateNewProductID() {
+	    String maxProductID = getMaxProductID();
+	    if (maxProductID != null && !maxProductID.isEmpty()) {
+	        String numericPart = maxProductID.substring(2); // Assuming the format is SPxxxx
+	        int newID = Integer.parseInt(numericPart) + 1;
+	        return "SP" + String.format("%05d", newID); // Format to 5 digits
+	    }
+	    return "SP00001"; // If no products exist, start with SP00001
+	}
+
+	public void editProduct(String tenSP, double giaBan, String donViTinh, String tinhTrang, String maDanhMuc, String hinh1, String moTa, int khoiLuong, int soLuong, String hinh2, String hinh3, String hinh4, String maSP) {
+		String query = "UPDATE Product SET tenSP = ?, giaBan = ?, donViTinh = ?, tinhTrang = ?, maDanhMuc = ?, hinh1 = ?, moTa = ?, khoiLuong = ?, soLuong = ?, hinh2 = ?, hinh3 = ?, hinh4 = ? WHERE maSP = ?";
+        try (Connection conn = ConnectDB.getConnection(); PreparedStatement ps = conn.prepareStatement(query);) {
+               ps.setString(1, tenSP);
+               ps.setDouble(2, giaBan);
+               ps.setString(3, donViTinh);
+               ps.setString(4, tinhTrang);
+               ps.setString(5, maDanhMuc);
+               ps.setString(6, hinh1);
+               ps.setString(7, moTa);
+               ps.setInt(8, khoiLuong);
+               ps.setInt(9, soLuong);
+               ps.setString(10, hinh2);
+               ps.setString(11, hinh3);
+               ps.setString(12, hinh4);
+               ps.setString(13, maSP);
+               
+               ps.executeUpdate();
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+	}
 	public boolean updateProduct(Product product) {
 		String query = "UPDATE Product SET tenSP = ?, giaBan = ?, donViTinh = ?, tinhTrang = ?, maDanhMuc = ?, hinh1 = ?, moTa = ?, khoiLuong = ?, soLuong = ?, hinh2 = ?, hinh3 = ?, hinh4 = ? WHERE maSP = ?";
 		try (Connection conn = ConnectDB.getConnection(); PreparedStatement ps = conn.prepareStatement(query);) {
@@ -156,6 +231,8 @@ public class ProductDAO {
 			ps.setString(11, product.getHinh3());
 			ps.setString(12, product.getHinh4());
 			ps.setString(13, product.getMaSP());
+			ps.setString(14, product.getAccount().getuID());
+
 			return ps.executeUpdate() > 0;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -196,7 +273,7 @@ public class ProductDAO {
 				product.setHinh2(rs.getString("hinh2"));
 				product.setHinh3(rs.getString("hinh3"));
 				product.setHinh4(rs.getString("hinh4"));
-
+				product.setAccount(new AccountDAO().getAccount(rs.getString("sell_ID")));
 				// Set danh muc
 				DanhMuc danhMuc = new DanhMucDAO().getDanhMucByMaDM(maDanhMuc);
 				product.setDanhMuc(danhMuc);
@@ -231,6 +308,7 @@ public class ProductDAO {
 				product.setHinh2(rs.getString("hinh2"));
 				product.setHinh3(rs.getString("hinh3"));
 				product.setHinh4(rs.getString("hinh4"));
+				product.setAccount(new AccountDAO().getAccount(rs.getString("sell_ID")));
 
 				// Set danh muc
 				String maDanhMuc = rs.getString("maDanhMuc");
@@ -268,6 +346,7 @@ public class ProductDAO {
 				product.setHinh2(rs.getString("hinh2"));
 				product.setHinh3(rs.getString("hinh3"));
 				product.setHinh4(rs.getString("hinh4"));
+				product.setAccount(new AccountDAO().getAccount(rs.getString("sell_ID")));
 
 				// Set danh muc
 				String maDanhMuc = rs.getString("maDanhMuc");
@@ -283,4 +362,44 @@ public class ProductDAO {
 
 		return products;
 	}
+	
+	
+	public List<Product> getProductBySellID(String sid) {
+		List<Product> products = new ArrayList<>();
+        String query = "SELECT * FROM Product WHERE sell_ID = ?";
+        try (Connection conn = ConnectDB.getConnection(); PreparedStatement ps = conn.prepareStatement(query);) {
+            ps.setString(1, sid);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product product = new Product();
+                product.setMaSP(rs.getString("maSP"));
+                product.setTenSP(rs.getString("tenSP"));
+                product.setGiaBan(rs.getDouble("giaBan"));
+                product.setDonViTinh(rs.getString("donViTinh"));
+                product.setTinhTrang(rs.getString("tinhTrang"));
+                product.setHinh1(rs.getString("hinh1"));
+                product.setMoTa(rs.getString("moTa"));
+                product.setKhoiLuong(rs.getInt("khoiLuong"));
+                product.setSoLuong(rs.getInt("soLuong"));
+                product.setHinh2(rs.getString("hinh2"));
+                product.setHinh3(rs.getString("hinh3"));
+                product.setHinh4(rs.getString("hinh4"));
+                product.setAccount(new AccountDAO().getAccount(rs.getString("sell_ID")));
+
+                // Set danh muc
+                String maDanhMuc = rs.getString("maDanhMuc");
+                DanhMuc danhMuc = new DanhMucDAO().getDanhMucByMaDM(maDanhMuc);
+                product.setDanhMuc(danhMuc);
+
+                products.add(product);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return products;
+    }
+	
+	
 }

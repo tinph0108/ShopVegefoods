@@ -14,6 +14,7 @@ public class Product {
     private String hinh2;
     private String hinh3;
     private String hinh4;
+    private Account account;
 	public String getMaSP() {
 		return maSP;
 	}
@@ -92,8 +93,19 @@ public class Product {
 	public void setHinh4(String hinh4) {
 		this.hinh4 = hinh4;
 	}
+	
+	public Product() {
+		super();
+	}
+	public Account getAccount() {
+		return account;
+	}
+	public void setAccount(Account account) {
+		this.account = account;
+	}
 	public Product(String maSP, String tenSP, double giaBan, String donViTinh, String tinhTrang, DanhMuc danhMuc,
-			String hinh1, String moTa, int khoiLuong, int soLuong, String hinh2, String hinh3, String hinh4) {
+			String hinh1, String moTa, int khoiLuong, int soLuong, String hinh2, String hinh3, String hinh4,
+			Account account) {
 		super();
 		this.maSP = maSP;
 		this.tenSP = tenSP;
@@ -108,17 +120,16 @@ public class Product {
 		this.hinh2 = hinh2;
 		this.hinh3 = hinh3;
 		this.hinh4 = hinh4;
-	}
-	public Product() {
-		super();
+		this.account = account;
 	}
 	@Override
 	public String toString() {
 		return "Product [maSP=" + maSP + ", tenSP=" + tenSP + ", giaBan=" + giaBan + ", donViTinh=" + donViTinh
 				+ ", tinhTrang=" + tinhTrang + ", danhMuc=" + danhMuc + ", hinh1=" + hinh1 + ", moTa=" + moTa
 				+ ", khoiLuong=" + khoiLuong + ", soLuong=" + soLuong + ", hinh2=" + hinh2 + ", hinh3=" + hinh3
-				+ ", hinh4=" + hinh4 + "]";
+				+ ", hinh4=" + hinh4 + ", account=" + account + "]";
 	}
+	
     
     
 }
