@@ -3,27 +3,26 @@ package servlet;
 import java.io.IOException;
 import java.util.List;
 
-import dao.DanhMucDAO;
-import dao.ProductDAO;
-import entity.DanhMuc;
-import entity.Product;
+import dao.AccountDAO;
+import entity.Account;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class ProductServlet
+ * Servlet implementation class ViewAccountsServlet
  */
-@WebServlet({ "/ProductServlet", "/product" })
-public class ProductServlet extends HttpServlet {
+@WebServlet({ "/ViewAccountsServlet", "/viewAccounts" })
+public class ViewAccountsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ProductServlet() {
+	public ViewAccountsServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -34,23 +33,12 @@ public class ProductServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String maDanhMuc = request.getParameter("maDanhMuc");
-        ProductDAO productDAO = new ProductDAO();
-        DanhMucDAO danhMucDAO = new DanhMucDAO();
-        List<Product> products;
-      
+		
+		AccountDAO accountDAO = new AccountDAO();
+		List<Account> accounts = accountDAO.getAllAccounts();
 
-        if (maDanhMuc == null || maDanhMuc.equals("all")) {
-            products = productDAO.getAllProduct();
-        } else {
-            products = productDAO.getProductByMaDM(maDanhMuc);
-        }
-
-        List<DanhMuc> categories = danhMucDAO.getAllDanhMuc();
-        request.setAttribute("categories", categories);
-        request.setAttribute("products", products);
-
-        request.getRequestDispatcher("Shop.jsp").forward(request, response);
+		request.setAttribute("listA", accounts);
+		request.getRequestDispatcher("ManagerAccount.jsp").forward(request, response);
 	}
 
 	/**

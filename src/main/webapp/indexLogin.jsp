@@ -592,9 +592,7 @@
 				<div class="col-md-7 heading-section ftco-animate text-center">
 					<span class="subheading">Testimony</span>
 					<h2 class="mb-4">Our satisfied customer says</h2>
-					<p>Far far away, behind the word mountains, far from the
-						countries Vokalia and Consonantia, there live the blind texts.
-						Separated they live in</p>
+					
 				</div>
 			</div>
 			<div class="row ftco-animate">
@@ -610,10 +608,8 @@
 									</span>
 								</div>
 								<div class="text text-center">
-									<p class="mb-5 pl-4 line">Far far away, behind the word
-										mountains, far from the countries Vokalia and Consonantia,
-										there live the blind texts.</p>
-									<p class="name">Garreth Smith</p>
+									  <p class="mb-5 pl-4 line">Vegefoods thực sự tuyệt vời! Sản phẩm luôn tươi ngon và dịch vụ khách hàng rất chu đáo.</p>
+                                <p class="name">Nguyễn Văn A</p>
 									<span class="position">Marketing Manager</span>
 								</div>
 							</div>
@@ -628,10 +624,8 @@
 									</span>
 								</div>
 								<div class="text text-center">
-									<p class="mb-5 pl-4 line">Far far away, behind the word
-										mountains, far from the countries Vokalia and Consonantia,
-										there live the blind texts.</p>
-									<p class="name">Garreth Smith</p>
+									  <p class="mb-5 pl-4 line">Mình rất hài lòng với Vegefoods, thực phẩm luôn đảm bảo chất lượng và giao hàng nhanh chóng.</p>
+                                <p class="name">Lê Thị B</p>
 									<span class="position">Interface Designer</span>
 								</div>
 							</div>
@@ -646,10 +640,8 @@
 									</span>
 								</div>
 								<div class="text text-center">
-									<p class="mb-5 pl-4 line">Far far away, behind the word
-										mountains, far from the countries Vokalia and Consonantia,
-										there live the blind texts.</p>
-									<p class="name">Garreth Smith</p>
+									 <p class="mb-5 pl-4 line">Vegefoods đã làm thay đổi cách tôi mua sắm thực phẩm. Tôi không thể hài lòng hơn.</p>
+                                <p class="name">Phạm Văn C</p>
 									<span class="position">UI Designer</span>
 								</div>
 							</div>
@@ -664,10 +656,8 @@
 									</span>
 								</div>
 								<div class="text text-center">
-									<p class="mb-5 pl-4 line">Far far away, behind the word
-										mountains, far from the countries Vokalia and Consonantia,
-										there live the blind texts.</p>
-									<p class="name">Garreth Smith</p>
+									<p class="mb-5 pl-4 line">Mua sắm tại Vegefoods luôn là một trải nghiệm tuyệt vời. Tôi rất khuyến khích cửa hàng này.</p>
+                                <p class="name">Trần Thị D</p>
 									<span class="position">Web Developer</span>
 								</div>
 							</div>
@@ -682,10 +672,8 @@
 									</span>
 								</div>
 								<div class="text text-center">
-									<p class="mb-5 pl-4 line">Far far away, behind the word
-										mountains, far from the countries Vokalia and Consonantia,
-										there live the blind texts.</p>
-									<p class="name">Garreth Smith</p>
+									 <p class="mb-5 pl-4 line">Chất lượng sản phẩm của Vegefoods luôn vượt trội. Tôi rất tin tưởng và yêu thích cửa hàng này.</p>
+                                <p class="name">Hoàng Văn E</p>
 									<span class="position">System Analyst</span>
 								</div>
 							</div>

@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.List;
 
 import dao.CartDAO;
@@ -36,6 +37,7 @@ public class CartServlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 	    Account account = (Account) session.getAttribute("acc");
+	    DecimalFormat df = new DecimalFormat("#,###");
 	    if (account == null) {
 	        response.sendRedirect("login");
 	        return;
@@ -44,13 +46,15 @@ public class CartServlet extends HttpServlet {
 	    CartDAO cartDAO = new CartDAO();
 	    List<Cart> cartItems = cartDAO.getCartItems(account.getuID());
 	    int totalItems = cartItems.stream().mapToInt(Cart::getAmount).sum();
+	    
 
 	    request.setAttribute("cartItems", cartItems);
 	    session.setAttribute("totalItems", totalItems);
 
 	    double totalPrice = cartItems.stream()
 	            .mapToDouble(cartItem -> cartItem.getProduct().getGiaBan() * cartItem.getAmount()).sum();
-	    request.setAttribute("totalPrice", totalPrice);
+	  
+	    request.setAttribute("totalPrice", df.format(totalPrice));
 
 	    request.getRequestDispatcher("Cart.jsp").forward(request, response);
 	}

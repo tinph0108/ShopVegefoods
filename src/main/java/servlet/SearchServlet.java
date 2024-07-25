@@ -14,16 +14,16 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ProductServlet
+ * Servlet implementation class SearchServlet
  */
-@WebServlet({ "/ProductServlet", "/product" })
-public class ProductServlet extends HttpServlet {
+@WebServlet({ "/SearchServlet", "/search" })
+public class SearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ProductServlet() {
+	public SearchServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -34,23 +34,8 @@ public class ProductServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String maDanhMuc = request.getParameter("maDanhMuc");
-        ProductDAO productDAO = new ProductDAO();
-        DanhMucDAO danhMucDAO = new DanhMucDAO();
-        List<Product> products;
-      
-
-        if (maDanhMuc == null || maDanhMuc.equals("all")) {
-            products = productDAO.getAllProduct();
-        } else {
-            products = productDAO.getProductByMaDM(maDanhMuc);
-        }
-
-        List<DanhMuc> categories = danhMucDAO.getAllDanhMuc();
-        request.setAttribute("categories", categories);
-        request.setAttribute("products", products);
-
-        request.getRequestDispatcher("Shop.jsp").forward(request, response);
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -59,8 +44,14 @@ public class ProductServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		String txtSearch = request.getParameter("txt");
+		ProductDAO dao = new ProductDAO();
+		List<Product> list = dao.searchProducts(txtSearch);
+		DanhMucDAO danhMucDAO = new DanhMucDAO();
+		List<DanhMuc> categories = danhMucDAO.getAllDanhMuc();
+		request.setAttribute("categories", categories);
+		request.setAttribute("products", list);
+		request.getRequestDispatcher("Shop.jsp").forward(request, response);
 	}
 
 }
