@@ -35,33 +35,25 @@ public class AddToCartServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		HttpSession session = request.getSession();
-        Account account = (Account) session.getAttribute("acc");
-        if (account == null) {
-            response.sendRedirect("login");
-            return;
-        }
+		  HttpSession session = request.getSession();
+	        Account account = (Account) session.getAttribute("acc");
+	        if (account == null) {
+	            response.sendRedirect("login");
+	            return;
+	        }
 
-        String maSP = request.getParameter("maSP");
-        int amount = Integer.parseInt(request.getParameter("amount"));
+	        String maSP = request.getParameter("maSP");
+	        int amount = Integer.parseInt(request.getParameter("amount"));
 
-        ProductDAO productDAO = new ProductDAO();
-        Product product = productDAO.getProductByMaSP(maSP);
+	        CartDAO cartDAO = new CartDAO();
+	        cartDAO.addToCart(account.getuID(), maSP, amount);
 
-        Cart cartItem = new Cart();
-        cartItem.setAccount(account);
-        cartItem.setProduct(product);
-        cartItem.setAmount(amount);
+	        List<Cart> cartItems = cartDAO.getCartItems(account.getuID());
+	        int totalItems = cartItems.stream().mapToInt(Cart::getAmount).sum();
 
-        CartDAO cartDAO = new CartDAO();
-        cartDAO.addToCart(cartItem);
-
-        // Cập nhật tổng số lượng sản phẩm trong giỏ hàng
-        List<Cart> cartItems = cartDAO.getCartItems(account.getuID());
-        int totalItems = cartItems.stream().mapToInt(Cart::getAmount).sum();
-        session.setAttribute("totalItems", totalItems);
-
-        response.sendRedirect("cart");
+	        response.setContentType("application/json");
+	        response.setCharacterEncoding("UTF-8");
+	        response.getWriter().write("{\"totalItems\":" + totalItems + "}");
 	}
 
 	/**

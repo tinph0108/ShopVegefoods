@@ -346,74 +346,74 @@
       </div>
     </div>
 
-    <section class="ftco-section">
+   <section class="ftco-section">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-xl-7 ftco-animate">
-                <form action="CheckoutServlet" method="post" class="billing-form">
-                    <h3 class="mb-4 billing-heading">Billing Details</h3>
-                    <div class="row align-items-end">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="firstname">First Name</label>
-                                <input type="text" class="form-control" name="firstName" required>
+            <div class="col-xl-10 ftco-animate">
+                <div class="row">
+                    <!-- Billing Details -->
+                    <div class="col-md-6">
+                        <form action="CheckoutServlet" method="post" class="billing-form">
+                            <h3 class="mb-4 billing-heading">Billing Details</h3>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="firstname">First Name</label>
+                                        <input type="text" class="form-control" name="firstName" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="lastname">Last Name</label>
+                                        <input type="text" class="form-control" name="lastName" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="address">Address</label>
+                                        <input type="text" class="form-control" name="address" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="phone">Phone</label>
+                                        <input type="text" class="form-control" name="phone" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" class="form-control" name="email" required>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="lastname">Last Name</label>
-                                <input type="text" class="form-control" name="lastName" required>
-                            </div>
-                        </div>
-                        <div class="w-100"></div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="address">Address</label>
-                                <input type="text" class="form-control" name="address" required>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="phone">Phone</label>
-                                <input type="text" class="form-control" name="phone" required>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" class="form-control" name="email" required>
-                            </div>
-                        </div>
-                        <div class="w-100"></div>
                     </div>
-                    <div class="row mt-5 pt-3">
-                        <div class="col-md-12 d-flex mb-5">
-                            <div class="cart-detail cart-total p-3 p-md-4">
-                                <h3 class="billing-heading mb-4">Cart Total</h3>
-                                <p class="d-flex">
-                                    <span>Subtotal</span>
-                                    <span>${totalPrice} VNĐ</span>
-                                </p>
-                                <p class="d-flex">
-                                    <span>Delivery</span>
-                                    <span>$0.00</span>
-                                </p>
-                                <p class="d-flex">
-                                    <span>Discount</span>
-                                    <span>$0.00</span>
-                                </p>
-                                <hr>
-                                <p class="d-flex total-price">
-                                    <span>Total</span>
-                                    <span>${totalPrice} VNĐ</span>
-                                </p>
-                            </div>
+
+                    <!-- Cart Total & Payment Method -->
+                    <div class="col-md-6">
+                        <div class="cart-detail cart-total p-3 p-md-4">
+                            <h3 class="billing-heading mb-4">Cart Total</h3>
+                            <p class="d-flex">
+                                <span>Subtotal</span>
+                                <span>${totalPrice} VNĐ</span>
+                            </p>
+                            <p class="d-flex">
+                                <span>Delivery</span>
+                                <span>$0.00</span>
+                            </p>
+                            <p class="d-flex">
+                                <span>Discount</span>
+                                <span>$0.00</span>
+                            </p>
+                            <hr>
+                            <p class="d-flex total-price">
+                                <span>Total</span>
+                                <span>${totalPrice} VNĐ</span>
+                            </p>
                         </div>
-                    </div>
-                    <div class="row mt-5 pt-3">
-                        <div class="col-md-12">
-                            <div class="cart-detail p-3 p-md-4">
-                                <h3 class="billing-heading mb-4">Payment Method</h3>
+
+                        <div class="cart-detail p-3 p-md-4 mt-5">
+                            <h3 class="billing-heading mb-4">Payment Method</h3>
                                 <div class="form-group">
                                     <div class="col-md-12">
                                         <div class="radio">
@@ -443,10 +443,10 @@
                                     </div>
                                 </div>
                                 <p><button type="submit" class="btn btn-primary py-3 px-4">Place an order</button></p>
-                            </div>
+                            </form> <!-- Đóng form ở đây -->
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>

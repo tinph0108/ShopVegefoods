@@ -12,18 +12,49 @@ import entity.Cart;
 import entity.Product;
 
 public class CartDAO {
-	public void addToCart(Cart cart) {
-        String query = "INSERT INTO Cart (uID, maSP, amount) VALUES (?, ?, ?)";
-        try (Connection conn = ConnectDB.getConnection();
-             PreparedStatement ps = conn.prepareStatement(query)) {
-            ps.setString(1, cart.getAccount().getuID());
-            ps.setString(2, cart.getProduct().getMaSP());
-            ps.setInt(3, cart.getAmount());
-            ps.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+	public void addToCart(String uID, String maSP, int amount) {
+	    try (Connection conn = ConnectDB.getConnection()) {
+	        // Kiểm tra xem sản phẩm đã tồn tại trong giỏ hàng chưa
+	        String sql = "SELECT * FROM Cart WHERE uID = ? AND maSP = ?";
+	        PreparedStatement ps = conn.prepareStatement(sql);
+	        ps.setString(1, uID);
+	        ps.setString(2, maSP);
+	        ResultSet rs = ps.executeQuery();
+	        if (rs.next()) {
+	            // Nếu sản phẩm đã tồn tại, tăng số lượng
+	            sql = "UPDATE Cart SET amount = amount + ? WHERE uID = ? AND maSP = ?";
+	            ps = conn.prepareStatement(sql);
+	            ps.setInt(1, amount);
+	            ps.setString(2, uID);
+	            ps.setString(3, maSP);
+	        } else {
+	            // Nếu sản phẩm chưa tồn tại, thêm mới
+	            sql = "INSERT INTO Cart (uID, maSP, amount) VALUES (?, ?, ?)";
+	            ps = conn.prepareStatement(sql);
+	            ps.setString(1, uID);
+	            ps.setString(2, maSP);
+	            ps.setInt(3, amount);
+	        }
+	        ps.executeUpdate();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
+	public boolean updateCartItem(String maCart, int delta) {
+	    try (Connection conn = ConnectDB.getConnection()) {
+	        String sql = "UPDATE Cart SET amount = amount + ? WHERE maCart = ?";
+	        PreparedStatement ps = conn.prepareStatement(sql);
+	        ps.setInt(1, delta);
+	        ps.setString(2, maCart);
+	        int rowsAffected = ps.executeUpdate();
+
+	        return rowsAffected > 0;
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return false;
+	    }
+	}
+
 	
 	 public List<Cart> getCartItems(String uid) {
 	        List<Cart> cartItems = new ArrayList<>();
@@ -99,4 +130,6 @@ public class CartDAO {
 				e.printStackTrace();
 			}
 		}
+		
+		
 }

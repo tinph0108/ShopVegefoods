@@ -28,25 +28,15 @@ public class UpdateCartItemServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		  String maCartStr = request.getParameter("maCart");
-	        String amountStr = request.getParameter("amount");
+		String maCart = request.getParameter("maCart");
+        int delta = Integer.parseInt(request.getParameter("delta"));
 
-	        if (maCartStr == null || amountStr == null || maCartStr.isEmpty() || amountStr.isEmpty()) {
-	            response.getWriter().write("error");
-	            return;
-	        }
+        CartDAO cartDAO = new CartDAO();
+        boolean success = cartDAO.updateCartItem(maCart, delta);
 
-	        try {
-	            int maCart = Integer.parseInt(maCartStr);
-	            int amount = Integer.parseInt(amountStr);
-
-	            CartDAO cartDAO = new CartDAO();
-	            cartDAO.updateCartItemAmount(maCart, amount);
-
-	            response.getWriter().write("success");
-	        } catch (NumberFormatException e) {
-	            response.getWriter().write("error");
-	        }
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write("{\"success\":" + success + "}");
 	}
 
 	/**

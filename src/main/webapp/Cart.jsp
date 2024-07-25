@@ -355,32 +355,32 @@
 		</div>
 	</div>
 
-<section class="ftco-section ftco-cart">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 ftco-animate">
-                <div class="cart-list">
-                    <table class="table">
-                        <thead class="thead-primary">
-                            <tr class="text-center">
-                                <th>&nbsp;</th>
-                                <th>&nbsp;</th>
-                                <th>Tên sản phẩm</th>
-                                <th>Giá</th>
-                                <th>Số lượng</th>
-                                <th>Tổng cộng</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach var="cartItem" items="${cartItems}">
-                                <tr class="text-center">
-                                    <td class="product-remove">
-                                        <a href="removeCartItem?maCart=${cartItem.maCart}">
-                                            <span class="ion-ios-close"></span>
-                                        </a>
-                                    </td>
-                                    <td class="image-prod">
-                                        <div class="img" style="background-image:url(
+	<section class="ftco-section ftco-cart">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 ftco-animate">
+					<div class="cart-list">
+						<table class="table">
+							<thead class="thead-primary">
+								<tr class="text-center">
+									<th>&nbsp;</th>
+									<th>&nbsp;</th>
+									<th>Name</th>
+									<th>Price</th>
+									<th>Quantity</th>
+									<th>Total</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach var="cartItem" items="${cartItems}">
+									<tr class="text-center">
+										<td class="product-remove"><a
+											href="removeCartItem?maCart=${cartItem.maCart}"> <span
+												class="ion-ios-close"></span>
+										</a></td>
+										<td class="image-prod">
+											<div class="img"
+												style="background-image:url(
                                             <c:choose>
                                                 <c:when test="${cartItem.product.hinh1.startsWith('http')}">
                                                     ${cartItem.product.hinh1}
@@ -390,98 +390,104 @@
                                                 </c:otherwise>
                                             </c:choose>
                                         );"></div>
-                                    </td>
-                                    <td class="product-name">
-                                        <h3>${cartItem.product.tenSP}</h3>
-                                    </td>
-                                    <td class="price">${cartItem.product.giaBan} VNĐ</td>
-                                    <td class="quantity">
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <a href="subAmountCart?productID=${cartItem.product.maSP}&amount=${cartItem.amount}">
-                                                    <button class="btn btn-outline-secondary decrement-btn" type="button">-</button>
-                                                </a>
-                                            </div>
-                                            <input type="number" name="quantity" class="quantity form-control input-number"
-                                                value="${cartItem.amount}" min="1" max="100" data-price="${cartItem.product.giaBan}" data-id="${cartItem.maCart}" readonly>
-                                            <div class="input-group-append">
-                                                <a href="addAmountCart?productID=${cartItem.product.maSP}&amount=${cartItem.amount}">
-                                                    <button class="btn btn-outline-secondary increment-btn" type="button">+</button>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="total" id="total-${cartItem.maCart}">${cartItem.product.giaBan * cartItem.amount} VNĐ</td>
-                                </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="row justify-content-end">
-            <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
-                <div class="cart-total mb-3">
-                    <h3>Coupon Code</h3>
-                    <p>Enter your coupon code if you have one</p>
-                    <form action="#" class="info">
-                        <div class="form-group">
-                            <label for="">Coupon code</label>
-                            <input type="text" class="form-control text-left px-3" placeholder="">
-                        </div>
-                    </form>
-                </div>
-                <p><a href="checkout.html" class="btn btn-primary py-3 px-4">Apply Coupon</a></p>
-            </div>
-            <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
-                <div class="cart-total mb-3">
-                    <h3>Estimate shipping and tax</h3>
-                    <p>Enter your destination to get a shipping estimate</p>
-                    <form action="#" class="info">
-                        <div class="form-group">
-                            <label for="">Country</label>
-                            <input type="text" class="form-control text-left px-3" placeholder="">
-                        </div>
-                        <div class="form-group">
-                            <label for="country">State/Province</label>
-                            <input type="text" class="form-control text-left px-3" placeholder="">
-                        </div>
-                        <div class="form-group">
-                            <label for="country">Zip/Postal Code</label>
-                            <input type="text" class="form-control text-left px-3" placeholder="">
-                        </div>
-                    </form>
-                </div>
-                <p><a href="checkout.html" class="btn btn-primary py-3 px-4">Estimate</a></p>
-            </div>
-            <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
-                <div class="cart-total mb-3">
-                    <h3>Cart Totals</h3>
-                    <p class="d-flex">
-                        <span>Subtotal</span>
-                        <span id="subtotal">${totalPrice} VNĐ</span>
-                    </p>
-                    <p class="d-flex">
-                        <span>Delivery</span>
-                        <span>0.00 VNĐ</span>
-                    </p>
-                    <p class="d-flex">
-                        <span>Discount</span>
-                        <span>0.00 VNĐ</span>
-                    </p>
-                    <hr>
-                    <p class="d-flex total-price">
-                        <span>Total</span>
-                        <span id="total">${totalPrice} VNĐ</span>
-                    </p>
-                </div>
-                <p>
-                    <a href="CheckoutServlet" class="btn btn-primary py-3 px-4">Proceed to Checkout</a>
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
+										</td>
+										<td class="product-name">
+											<h3>${cartItem.product.tenSP}</h3>
+										</td>
+										<td class="price">${cartItem.product.giaBan}VNĐ</td>
+										<td class="quantity">
+											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<button class="btn btn-outline-secondary decrement-btn"
+														type="button"
+														onclick="updateCartItem('${cartItem.maCart}', -1)"  min="1">-</button>
+												</div>
+												<input type="number" name="quantity"
+													class="quantity form-control input-number"
+													value="${cartItem.amount}" min="1" max="100" readonly>
+												<div class="input-group-append">
+													<button class="btn btn-outline-secondary increment-btn"
+														type="button"
+														onclick="updateCartItem('${cartItem.maCart}', 1)">+</button>
+												</div>
+											</div>
+										</td>
+
+										<td class="total" id="total-${cartItem.maCart}">${cartItem.product.giaBan * cartItem.amount}
+											VNĐ</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="row justify-content-end">
+				<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
+					<div class="cart-total mb-3">
+						<h3>Coupon Code</h3>
+						<p>Enter your coupon code if you have one</p>
+						<form action="#" class="info">
+							<div class="form-group">
+								<label for="">Coupon code</label> <input type="text"
+									class="form-control text-left px-3" placeholder="">
+							</div>
+						</form>
+					</div>
+					<p>
+						<a href="checkout.html" class="btn btn-primary py-3 px-4">Apply
+							Coupon</a>
+					</p>
+				</div>
+				<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
+					<div class="cart-total mb-3">
+						<h3>Estimate shipping and tax</h3>
+						<p>Enter your destination to get a shipping estimate</p>
+						<form action="#" class="info">
+							<div class="form-group">
+								<label for="">Country</label> <input type="text"
+									class="form-control text-left px-3" placeholder="">
+							</div>
+							<div class="form-group">
+								<label for="country">State/Province</label> <input type="text"
+									class="form-control text-left px-3" placeholder="">
+							</div>
+							<div class="form-group">
+								<label for="country">Zip/Postal Code</label> <input type="text"
+									class="form-control text-left px-3" placeholder="">
+							</div>
+						</form>
+					</div>
+					<p>
+						<a href="checkout.html" class="btn btn-primary py-3 px-4">Estimate</a>
+					</p>
+				</div>
+				<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
+					<div class="cart-total mb-3">
+						<h3>Cart Totals</h3>
+						<p class="d-flex">
+							<span>Subtotal</span> <span id="subtotal">${totalPrice}
+								VNĐ</span>
+						</p>
+						<p class="d-flex">
+							<span>Delivery</span> <span>0.00 VNĐ</span>
+						</p>
+						<p class="d-flex">
+							<span>Discount</span> <span>0.00 VNĐ</span>
+						</p>
+						<hr>
+						<p class="d-flex total-price">
+							<span>Total</span> <span id="total">${totalPrice} VNĐ</span>
+						</p>
+					</div>
+					<p>
+						<a href="CheckoutServlet" class="btn btn-primary py-3 px-4">Proceed
+							to Checkout</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
 
 
 
@@ -589,7 +595,9 @@
 					<p>
 						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 						Copyright &copy;
-						<script>document.write(new Date().getFullYear());</script>
+						<script>
+							document.write(new Date().getFullYear());
+						</script>
 						All rights reserved | This template is made with <i
 							class="icon-heart color-danger" aria-hidden="true"></i> by <a
 							href="https://colorlib.com" target="_blank">Colorlib</a>
@@ -630,7 +638,29 @@
 	<script src="js/google-map.js"></script>
 	<script src="js/main.js"></script>
 
-	
+<script >
+function updateCartItem(maCart, delta) {
+    $.ajax({
+        url: 'updateCartItem',
+        type: 'GET',
+        data: {
+            maCart: maCart,
+            delta: delta
+        },
+        success: function(response) {
+            if (response.success) {
+                location.reload(); // Reload the page to reflect the changes
+            } else {
+                alert('Failed to update cart item!');
+            }
+        },
+        error: function(xhr, status, error) {
+            alert('Error updating cart item!');
+        }
+    });
+}
+
+</script>
 
 
 </body>
