@@ -218,7 +218,7 @@
 							<a class="dropdown-item" href="product">Shop</a> <a
 								class="dropdown-item" href="wishlist.html">Wishlist</a> <a
 								class="dropdown-item" href="ProductSingle.jsp">Single
-								Product</a> <a class="dropdown-item" href="cart">Cart</a> <a
+								Product</a> <a class="dropdown-item" href="Cart.jsp">Cart</a> <a
 								class="dropdown-item" href="checkout.html">Checkout</a>
 						</div></li>
 					<li class="nav-item"><a href="About.jsp" class="nav-link">About</a></li>
@@ -239,7 +239,11 @@
 				</form>
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item cta cta-colored"><a href="cart"
-						class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+						class="nav-link"> <span class="icon-shopping_cart"></span> [<span
+							id="cart-count"><c:out value="${totalItems}" /></span>]
+					</a></li>
+
+
 					<c:if test="${sessionScope.acc != null}">
 						<li class="nav-item dropdown pe-3 nav-profile"><a
 							class="nav-link nav-profile d-flex align-items-center pe-0"
@@ -562,8 +566,9 @@
 													class="add-to-cart d-flex justify-content-center align-items-center text-center">
 													<span><i class="ion-ios-menu"></i></span>
 												</a> <a href="#"
-													class="buy-now d-flex justify-content-center align-items-center mx-1">
-													<span><i class="ion-ios-cart"></i></span>
+													class="buy-now d-flex justify-content-center align-items-center mx-1"
+													onclick="addToCart(event, '${product.maSP}')"> <span><i
+														class="ion-ios-cart"></i></span>
 												</a> <a href="#"
 													class="heart d-flex justify-content-center align-items-center">
 													<span><i class="ion-ios-heart"></i></span>
@@ -883,6 +888,30 @@
 			} else {
 				$('#search-results').hide();
 			}
+		}
+	</script>
+
+	<script>
+		function addToCart(event, maSP) {
+			event.preventDefault(); // Ngăn không cho trang tải lại
+			$.ajax({
+				url : 'addToCart',
+				type : 'GET',
+				data : {
+					maSP : maSP,
+					amount : 1
+				},
+				success : function(response) {
+					// Xử lý kết quả thành công
+					alert('Product added to cart successfully!');
+					// Cập nhật số lượng sản phẩm trong giỏ hàng (nếu cần thiết)
+					$('#cart-count').text(response.totalItems); // Giả sử bạn có một phần tử với id "cart-count" để hiển thị số lượng sản phẩm trong giỏ hàng
+				},
+				error : function(xhr, status, error) {
+					// Xử lý kết quả lỗi
+					alert('Error adding product to cart!');
+				}
+			});
 		}
 	</script>
 

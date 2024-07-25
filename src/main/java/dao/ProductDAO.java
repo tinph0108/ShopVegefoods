@@ -401,5 +401,14 @@ public class ProductDAO {
         return products;
     }
 	
-	
+	public void updateProductQuantity(String maSP, int newQuantity) {
+        String query = "UPDATE Product SET soLuong = ? WHERE maSP = ?";
+        try (Connection conn = ConnectDB.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setInt(1, newQuantity);
+            ps.setString(2, maSP);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

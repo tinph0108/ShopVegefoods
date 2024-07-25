@@ -170,7 +170,7 @@
 							<a class="dropdown-item" href="product">Shop</a> <a
 								class="dropdown-item" href="wishlist.html">Wishlist</a> <a
 								class="dropdown-item" href="ProductSingle.jsp">Single
-								Product</a> <a class="dropdown-item" href="cart">Cart</a> <a
+								Product</a> <a class="dropdown-item" href="Cart.jsp">Cart</a> <a
 								class="dropdown-item" href="checkout.html">Checkout</a>
 						</div></li>
 					<li class="nav-item"><a href="About.jsp" class="nav-link">About</a></li>
@@ -190,7 +190,7 @@
 					</div>
 				</form>
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item cta cta-colored"><a href="cart"
+					<li class="nav-item cta cta-colored"><a href="Cart.jsp"
 						class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
 					<c:if test="${sessionScope.acc != null}">
 						<script type="text/javascript">
@@ -418,7 +418,7 @@
 												<a href="productDetail?productId=${product.maSP}"
 													class="add-to-cart d-flex justify-content-center align-items-center text-center">
 													<span><i class="ion-ios-menu"></i></span>
-												</a> <a href="#"
+												</a> <a href="Login.jsp"
 													class="buy-now d-flex justify-content-center align-items-center mx-1">
 													<span><i class="ion-ios-cart"></i></span>
 												</a> <a href="#"

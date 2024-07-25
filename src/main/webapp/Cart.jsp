@@ -1,18 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList"%>
-<%@ page import="java.util.List"%>
-<%@ page import="entity.*"%>
-<%@ page import="dao.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Chi tiết sản phẩm</title>
+<title>Giỏ hàng</title>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
 <link
 	href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
 	rel="stylesheet">
@@ -22,9 +19,6 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap"
 	rel="stylesheet">
-
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
 <link rel="stylesheet" href="css/animate.css">
@@ -40,46 +34,11 @@
 <link rel="stylesheet" href="css/bootstrap-datepicker.css">
 <link rel="stylesheet" href="css/jquery.timepicker.css">
 
+
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
 <style>
-.carousel-control-prev, .carousel-control-next {
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	background-color: rgba(0, 0, 0, 0.5);
-	border: none;
-	border-radius: 50%;
-	color: #fff;
-	width: 40px;
-	height: 40px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	cursor: pointer;
-}
-
-.carousel-control-prev {
-	left: -20px;
-}
-
-.carousel-control-next {
-	right: -20px;
-}
-
-.carousel-control-prev-icon, .carousel-control-next-icon {
-	font-size: 20px;
-}
-
-.owl-carousel .item {
-	position: relative;
-}
-
-.owl-carousel .item .product {
-	margin: 10px;
-}
-
 .navbar-nav {
 	flex-direction: row;
 }
@@ -184,6 +143,10 @@
 	font-size: 14px;
 }
 
+.ftco-navbar-light .navbar-nav>.nav-item>.nav-link {
+	padding-left: 0 !important; /* Loại bỏ padding-left */
+}
+
 .nav-profile img {
 	width: 30px;
 	height: 30px;
@@ -227,7 +190,6 @@
 </style>
 </head>
 <body class="goto-here">
-
 	<nav
 		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 		id="ftco-navbar">
@@ -249,8 +211,8 @@
 							<a class="dropdown-item" href="product">Shop</a> <a
 								class="dropdown-item" href="wishlist.html">Wishlist</a> <a
 								class="dropdown-item" href="ProductSingle.jsp">Single
-								Product</a> <a class="dropdown-item" href="cart">Cart</a> <a
-								class="dropdown-item" href="checkout.html">Checkout</a>
+								Product</a> <a class="dropdown-item" href="Cart.jsp">Cart</a> <a
+								class="dropdown-item" href="CheckoutServlet">Checkout</a>
 						</div></li>
 					<li class="nav-item"><a href="About.jsp" class="nav-link">About</a></li>
 					<li class="nav-item"><a href="Blog.jsp" class="nav-link">Blog</a></li>
@@ -269,14 +231,12 @@
 					</div>
 				</form>
 				<ul class="navbar-nav ml-auto">
-					<c:if test="${sessionScope.acc != null}">
-						<li class="nav-item cta cta-colored">
-    <a href="cart" class="nav-link">
-        <span class="icon-shopping_cart"></span>
-        [<span id="cart-count"><c:out value="${totalItems}" /></span>]
-    </a>
-</li>
+					<li class="nav-item cta cta-colored"><a href="cart"
+						class="nav-link"> <span class="icon-shopping_cart"></span> [<c:out
+								value="${totalItems}" />]
+					</a></li>
 
+					<c:if test="${sessionScope.acc != null}">
 						<li class="nav-item dropdown pe-3 nav-profile"><a
 							class="nav-link nav-profile d-flex align-items-center pe-0"
 							href="#" data-bs-toggle="dropdown"> <img
@@ -305,7 +265,6 @@
 										</c:choose>
 								</span>
 								</li>
-								<li><hr class="dropdown-divider"></li>
 
 								<c:if test="${sessionScope.acc.admin == true}">
 									<li><hr class="dropdown-divider"></li>
@@ -313,35 +272,37 @@
 										href="Admin.jsp"> <svg xmlns="http://www.w3.org/2000/svg"
 												width="16" height="16" fill="currentColor"
 												class="bi bi-people" viewBox="0 0 16 16">
-                                                <path
+  <path
 													d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1zm-7.978-1L7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0M6.936 9.28a6 6 0 0 0-1.23-.247A7 7 0 0 0 5 9c-4 0-5 3-5 4q0 1 1 1h4.216A2.24 2.24 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816M4.92 10A5.5 5.5 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4" />
-                                            </svg> <span
-											style="margin-left: 8px">Trang quản lý</span>
+</svg> <span style="margin-left: 8px">Trang quản lý</span>
 									</a></li>
 								</c:if>
+
+
 								<c:if test="${sessionScope.acc.sell == true}">
 									<li><hr class="dropdown-divider"></li>
 									<li><a class="dropdown-item d-flex align-items-center"
 										href="Admin.jsp"> <svg xmlns="http://www.w3.org/2000/svg"
 												width="16" height="16" fill="currentColor"
 												class="bi bi-basket3" viewBox="0 0 16 16">
-                                                <path
-													d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1 0-1h1.717L5.07 1.243a.5.5 0 0 1 .686-.172zM3.394 15l-1.48-6h-.97l1.525 6.426a.75.75 0 0 0 .729.574h9.606a.75.75 0 0 0 .73-.574L15.056 9h-.972l-1.479 6z" />
-                                            </svg> <span
-											style="margin-left: 8px">Trang quản lý</span>
+  <path
+													d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 .5 6h1.717L5.07 1.243a.5.5 0 0 1 .686-.172zM3.394 15l-1.48-6h-.97l1.525 6.426a.75.75 0 0 0 .729.574h9.606a.75.75 0 0 0 .73-.574L15.056 9h-.972l-1.479 6z" />
+</svg> <span style="margin-left: 8px">Trang quản lý</span>
 									</a></li>
+
 								</c:if>
+
+
 								<li><hr class="dropdown-divider"></li>
 								<li><a class="dropdown-item d-flex align-items-center"
 									href="users-profile.html"> <svg
 											xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 											fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
-                                            <path
+  <path
 												d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0" />
-                                            <path
+  <path
 												d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z" />
-                                        </svg> <span style="margin-left: 8px">Account
-											Settings</span>
+</svg> <span style="margin-left: 8px">Account Settings</span>
 								</a></li>
 								<li><hr class="dropdown-divider"></li>
 								<li><a class="dropdown-item d-flex align-items-center"
@@ -349,36 +310,34 @@
 											xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 											fill="currentColor" class="bi bi-question-circle"
 											viewBox="0 0 16 16">
-                                            <path
+  <path
 												d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
-                                            <path
+  <path
 												d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286m1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94" />
-                                        </svg> <span style="margin-left: 8px">Need
-											Help?</span>
+</svg> <span style="margin-left: 8px">Need Help?</span>
 								</a></li>
 								<li><hr class="dropdown-divider"></li>
 								<li><a class="dropdown-item d-flex align-items-center"
 									href="logout"> <svg xmlns="http://www.w3.org/2000/svg"
 											width="16" height="16" fill="currentColor"
 											class="bi bi-box-arrow-right" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd"
+  <path fill-rule="evenodd"
 												d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
-                                            <path fill-rule="evenodd"
+  <path fill-rule="evenodd"
 												d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
-                                        </svg> <span style="margin-left: 8px">Sign
-											Out</span>
+</svg> <span style="margin-left: 8px"> Sign Out</span>
 								</a></li>
 							</ul></li>
 					</c:if>
 					<c:if test="${sessionScope.acc == null}">
-						<li class="nav-item"><a href="Login.jsp" class="nav-link"><i
-								class="fas fa-sign-in-alt"></i> Login</a></li>
+						<li class="nav-item"><a href="Login.jsp" class="nav-link">
+								<i class="fas fa-sign-in-alt"></i> Login
+						</a></li>
 					</c:if>
 				</ul>
 			</div>
 		</div>
 	</nav>
-
 	<!-- END nav -->
 
 	<div class="hero-wrap hero-bread"
@@ -388,159 +347,142 @@
 				class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
 					<p class="breadcrumbs">
-						<span class="mr-2"><a href="index">Home</a></span> <span
-							class="mr-2"><a href="index.html">Product</a></span> <span>Product
-							Single</span>
+						<span class="mr-2"><a href="index.html">Home</a></span> <span>Cart</span>
 					</p>
-					<h1 class="mb-0 bread">Product Single</h1>
+					<h1 class="mb-0 bread">My Cart</h1>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<section class="ftco-section">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6 mb-5 ftco-animate">
-					<c:choose>
-						<c:when test="${product.hinh1.startsWith('http')}">
-							<a href="${product.hinh1}" class="image-popup"> <img
-								src="${product.hinh1}" class="img-fluid" alt="${product.tenSP}">
-							</a>
-						</c:when>
-						<c:otherwise>
-							<a href="images/${product.hinh1}" class="image-popup"> <img
-								src="images/${product.hinh1}" class="img-fluid"
-								alt="${product.tenSP}">
-							</a>
-						</c:otherwise>
-					</c:choose>
-				</div>
+<section class="ftco-section ftco-cart">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 ftco-animate">
+                <div class="cart-list">
+                    <table class="table">
+                        <thead class="thead-primary">
+                            <tr class="text-center">
+                                <th>&nbsp;</th>
+                                <th>&nbsp;</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Giá</th>
+                                <th>Số lượng</th>
+                                <th>Tổng cộng</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach var="cartItem" items="${cartItems}">
+                                <tr class="text-center">
+                                    <td class="product-remove">
+                                        <a href="removeCartItem?maCart=${cartItem.maCart}">
+                                            <span class="ion-ios-close"></span>
+                                        </a>
+                                    </td>
+                                    <td class="image-prod">
+                                        <div class="img" style="background-image:url(
+                                            <c:choose>
+                                                <c:when test="${cartItem.product.hinh1.startsWith('http')}">
+                                                    ${cartItem.product.hinh1}
+                                                </c:when>
+                                                <c:otherwise>
+                                                    images/${cartItem.product.hinh1}
+                                                </c:otherwise>
+                                            </c:choose>
+                                        );"></div>
+                                    </td>
+                                    <td class="product-name">
+                                        <h3>${cartItem.product.tenSP}</h3>
+                                    </td>
+                                    <td class="price">${cartItem.product.giaBan} VNĐ</td>
+                                    <td class="quantity">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <a href="subAmountCart?productID=${cartItem.product.maSP}&amount=${cartItem.amount}">
+                                                    <button class="btn btn-outline-secondary decrement-btn" type="button">-</button>
+                                                </a>
+                                            </div>
+                                            <input type="number" name="quantity" class="quantity form-control input-number"
+                                                value="${cartItem.amount}" min="1" max="100" data-price="${cartItem.product.giaBan}" data-id="${cartItem.maCart}" readonly>
+                                            <div class="input-group-append">
+                                                <a href="addAmountCart?productID=${cartItem.product.maSP}&amount=${cartItem.amount}">
+                                                    <button class="btn btn-outline-secondary increment-btn" type="button">+</button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="total" id="total-${cartItem.maCart}">${cartItem.product.giaBan * cartItem.amount} VNĐ</td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-end">
+            <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
+                <div class="cart-total mb-3">
+                    <h3>Coupon Code</h3>
+                    <p>Enter your coupon code if you have one</p>
+                    <form action="#" class="info">
+                        <div class="form-group">
+                            <label for="">Coupon code</label>
+                            <input type="text" class="form-control text-left px-3" placeholder="">
+                        </div>
+                    </form>
+                </div>
+                <p><a href="checkout.html" class="btn btn-primary py-3 px-4">Apply Coupon</a></p>
+            </div>
+            <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
+                <div class="cart-total mb-3">
+                    <h3>Estimate shipping and tax</h3>
+                    <p>Enter your destination to get a shipping estimate</p>
+                    <form action="#" class="info">
+                        <div class="form-group">
+                            <label for="">Country</label>
+                            <input type="text" class="form-control text-left px-3" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="country">State/Province</label>
+                            <input type="text" class="form-control text-left px-3" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="country">Zip/Postal Code</label>
+                            <input type="text" class="form-control text-left px-3" placeholder="">
+                        </div>
+                    </form>
+                </div>
+                <p><a href="checkout.html" class="btn btn-primary py-3 px-4">Estimate</a></p>
+            </div>
+            <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
+                <div class="cart-total mb-3">
+                    <h3>Cart Totals</h3>
+                    <p class="d-flex">
+                        <span>Subtotal</span>
+                        <span id="subtotal">${totalPrice} VNĐ</span>
+                    </p>
+                    <p class="d-flex">
+                        <span>Delivery</span>
+                        <span>0.00 VNĐ</span>
+                    </p>
+                    <p class="d-flex">
+                        <span>Discount</span>
+                        <span>0.00 VNĐ</span>
+                    </p>
+                    <hr>
+                    <p class="d-flex total-price">
+                        <span>Total</span>
+                        <span id="total">${totalPrice} VNĐ</span>
+                    </p>
+                </div>
+                <p>
+                    <a href="CheckoutServlet" class="btn btn-primary py-3 px-4">Proceed to Checkout</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
 
-				<div class="col-lg-6 product-details pl-md-5 ftco-animate">
-					<h3>${product.tenSP}</h3>
-					<div class="rating d-flex">
-						<p class="text-left mr-4">
-							<a href="#" class="mr-2">5.0</a> <a href="#"><span
-								class="ion-ios-star-outline"></span></a> <a href="#"><span
-								class="ion-ios-star-outline"></span></a> <a href="#"><span
-								class="ion-ios-star-outline"></span></a> <a href="#"><span
-								class="ion-ios-star-outline"></span></a> <a href="#"><span
-								class="ion-ios-star-outline"></span></a>
-						</p>
-						<p class="text-left mr-4">
-							<a href="#" class="mr-2" style="color: #000;">100 <span
-								style="color: #bbb;">Rating</span></a>
-						</p>
-						<p class="text-left">
-							<a href="#" class="mr-2" style="color: #000;">500 <span
-								style="color: #bbb;">Sold</span></a>
-						</p>
-					</div>
-					<p class="price">
-						<span>${product.giaBan} VNĐ</span>
-					</p>
-
-					<p>${product.moTa}</p>
-					<div class="row mt-4">
-
-						<div class="w-100"></div>
-						<div class="input-group col-md-6 d-flex mb-3">
-							<span class="input-group-btn mr-2">
-								<button type="button" class="quantity-left-minus btn"
-									data-type="minus" data-field="">
-									<i class="ion-ios-remove"></i>
-								</button>
-							</span> <input type="text" id="quantity" name="quantity"
-								class="form-control input-number" value="1" min="1" max="100">
-							<span class="input-group-btn ml-2">
-								<button type="button" class="quantity-right-plus btn"
-									data-type="plus" data-field="">
-									<i class="ion-ios-add"></i>
-								</button>
-							</span>
-						</div>
-						<div class="w-100"></div>
-						<div class="col-md-12">
-							<p style="color: #000;">Số lượng còn lại: ${product.soLuong}</p>
-						</div>
-					</div>
-					<p>
-						<a href="#" class="btn btn-black py-3 px-5"
-							onclick="addToCart(event, '${product.maSP}')">Add to Cart</a>
-					</p>
-
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<section class="ftco-section">
-		<div class="container">
-			<div class="row justify-content-center mb-3 pb-3">
-				<div class="col-md-12 heading-section text-center ftco-animate">
-					<span class="subheading">Products</span>
-					<h2 class="mb-4">Related Products</h2>
-				</div>
-			</div>
-			<div class="container position-relative">
-				<div class="owl-carousel owl-theme">
-					<c:forEach var="relatedProduct" items="${relatedProducts}">
-						<div class="item">
-							<div class="product">
-								<a href="productDetail?productId=${relatedProduct.maSP}"
-									class="img-prod"> <c:choose>
-										<c:when test="${relatedProduct.hinh1.startsWith('http')}">
-											<img class="img-fluid" src="${relatedProduct.hinh1}"
-												alt="${relatedProduct.tenSP}">
-										</c:when>
-										<c:otherwise>
-											<img class="img-fluid" src="images/${relatedProduct.hinh1}"
-												alt="${relatedProduct.tenSP}">
-										</c:otherwise>
-									</c:choose>
-									<div class="overlay"></div>
-								</a>
-
-								<div class="text py-3 pb-4 px-3 text-center">
-									<h3>
-										<a href="productDetail?productId=${relatedProduct.maSP}">${relatedProduct.tenSP}</a>
-									</h3>
-									<div class="d-flex">
-										<div class="pricing">
-											<p class="price">
-												<span>${relatedProduct.giaBan} VNĐ</span>
-											</p>
-										</div>
-									</div>
-									<div class="bottom-area d-flex px-3">
-										<div class="m-auto d-flex">
-											<a href="#"
-												class="add-to-cart d-flex justify-content-center align-items-center text-center">
-												<span><i class="ion-ios-menu"></i></span>
-											</a> <a href="#"
-												class="buy-now d-flex justify-content-center align-items-center mx-1">
-												<span><i class="ion-ios-cart"></i></span>
-											</a> <a href="#"
-												class="heart d-flex justify-content-center align-items-center">
-												<span><i class="ion-ios-heart"></i></span>
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</c:forEach>
-				</div>
-				<button class="carousel-control-prev" type="button">
-					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				</button>
-				<button class="carousel-control-next" type="button">
-					<span class="carousel-control-next-icon" aria-hidden="true"></span>
-				</button>
-			</div>
-		</div>
-	</section>
 
 
 
@@ -580,16 +522,15 @@
 				<div class="col-md">
 					<div class="ftco-footer-widget mb-4">
 						<h2 class="ftco-heading-2">Vegefoods</h2>
-						<p>Rau sạch, tươi ngon từ trang trại đến bàn ăn của bạn!</p>
+						<p>Far far away, behind the word mountains, far from the
+							countries Vokalia and Consonantia.</p>
 						<ul
 							class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
 							<li class="ftco-animate"><a href="#"><span
 									class="icon-twitter"></span></a></li>
-							<li class="ftco-animate"><a
-								href="https://www.facebook.com/sniT.18"><span
+							<li class="ftco-animate"><a href="#"><span
 									class="icon-facebook"></span></a></li>
-							<li class="ftco-animate"><a
-								href="https://www.instagram.com/s1mpel8"><span
+							<li class="ftco-animate"><a href="#"><span
 									class="icon-instagram"></span></a></li>
 						</ul>
 					</div>
@@ -598,8 +539,8 @@
 					<div class="ftco-footer-widget mb-4 ml-md-5">
 						<h2 class="ftco-heading-2">Menu</h2>
 						<ul class="list-unstyled">
-							<li><a href="Shop.jsp" class="py-2 d-block">Shop</a></li>
-							<li><a href="About.jsp" class="py-2 d-block">About</a></li>
+							<li><a href="#" class="py-2 d-block">Shop</a></li>
+							<li><a href="#" class="py-2 d-block">About</a></li>
 							<li><a href="#" class="py-2 d-block">Journal</a></li>
 							<li><a href="#" class="py-2 d-block">Contact Us</a></li>
 						</ul>
@@ -631,12 +572,12 @@
 						<div class="block-23 mb-3">
 							<ul>
 								<li><span class="icon icon-map-marker"></span><span
-									class="text">12 Nguyễn Văn Bảo, Phường 4, Gò Vấp, Hồ Chí
-										Minh</span></li>
+									class="text">203 Fake St. Mountain View, San Francisco,
+										California, USA</span></li>
 								<li><a href="#"><span class="icon icon-phone"></span><span
-										class="text">+84 327 858 843</span></a></li>
+										class="text">+2 392 3929 210</span></a></li>
 								<li><a href="#"><span class="icon icon-envelope"></span><span
-										class="text">tinphan924@gmail.com</span></a></li>
+										class="text">info@yourdomain.com</span></a></li>
 							</ul>
 						</div>
 					</div>
@@ -648,9 +589,7 @@
 					<p>
 						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 						Copyright &copy;
-						<script>
-							document.write(new Date().getFullYear());
-						</script>
+						<script>document.write(new Date().getFullYear());</script>
 						All rights reserved | This template is made with <i
 							class="icon-heart color-danger" aria-hidden="true"></i> by <a
 							href="https://colorlib.com" target="_blank">Colorlib</a>
@@ -660,6 +599,7 @@
 			</div>
 		</div>
 	</footer>
+
 
 
 	<!-- loader -->
@@ -690,117 +630,7 @@
 	<script src="js/google-map.js"></script>
 	<script src="js/main.js"></script>
 
-
-	<script>
-		$(document).ready(function() {
-			var quantitiy = 0;
-			$('.quantity-right-plus').click(function(e) {
-				e.preventDefault();
-				var quantity = parseInt($('#quantity').val());
-				$('#quantity').val(quantity + 1);
-			});
-
-			$('.quantity-left-minus').click(function(e) {
-				e.preventDefault();
-				var quantity = parseInt($('#quantity').val());
-				if (quantity > 1) {
-					$('#quantity').val(quantity - 1);
-				}
-			});
-		});
-	</script>
-	<script>
-		$(document).ready(function() {
-			var owl = $(".owl-carousel");
-			owl.owlCarousel({
-				loop : true,
-				margin : 10,
-				nav : false,
-				responsive : {
-					0 : {
-						items : 1
-					},
-					600 : {
-						items : 2
-					},
-					1000 : {
-						items : 4
-					}
-				}
-			});
-
-			$(".carousel-control-next").click(function() {
-				owl.trigger('next.owl.carousel');
-			});
-
-			$(".carousel-control-prev").click(function() {
-				owl.trigger('prev.owl.carousel');
-			});
-		});
-	</script>
-	<script>
-		function searchProducts() {
-			var query = document.getElementById("search-query").value;
-			if (query.length > 2) {
-				$
-						.ajax({
-							url : 'ProductIndexServlet',
-							type : 'get',
-							data : {
-								query : query
-							},
-							dataType : 'json',
-							success : function(data) {
-								var searchResults = $('#search-results ul');
-								searchResults.empty();
-								if (data.length > 0) {
-									data
-											.forEach(function(product) {
-												searchResults
-														.append('<li>'
-																+ '<img src="images/' + product.hinh1 + '" alt="' + product.tenSP + '">'
-																+ '<a href="productDetail?productId='
-																+ product.maSP
-																+ '">'
-																+ '<span>'
-																+ product.tenSP
-																+ '</span>'
-																+ '<span>'
-																+ product.giaBan
-																+ ' VNĐ</span>'
-																+ '</a>'
-																+ '</li>');
-											});
-									$('#search-results').show();
-								}
-							}
-						});
-			} else {
-				$('#search-results').hide();
-			}
-		}
-	</script>
-
-<script>
-    function addToCart(event, maSP) {
-        event.preventDefault(); // Ngăn không cho trang tải lại
-        $.ajax({
-            url: 'addToCart',
-            type: 'GET',
-            data: { maSP: maSP, amount: 1 },
-            success: function(response) {
-                // Xử lý kết quả thành công
-                alert('Product added to cart successfully!');
-                // Cập nhật số lượng sản phẩm trong giỏ hàng (nếu cần thiết)
-                $('#cart-count').text(response.totalItems); // Giả sử bạn có một phần tử với id "cart-count" để hiển thị số lượng sản phẩm trong giỏ hàng
-            },
-            error: function(xhr, status, error) {
-                // Xử lý kết quả lỗi
-                alert('Error adding product to cart!');
-            }
-        });
-    }
-</script>
+	
 
 
 </body>

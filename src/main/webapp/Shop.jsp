@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page import="java.util.List"%>
 <%@ page import="entity.Product"%>
 <%@ page import="entity.DanhMuc"%>
@@ -154,59 +155,204 @@
 #search-results ul li a span {
     font-size: 14px;
 }
+.ftco-navbar-light .navbar-nav>.nav-item>.nav-link {
+	padding-left: 0 !important; /* Loại bỏ padding-left */
+}
 
+.nav-profile img {
+	width: 30px;
+	height: 30px;
+}
+
+.nav-profile .dropdown-menu {
+	width: 200px;
+	padding: 10px;
+	border-radius: 10px;
+	background: #f8f9fa;
+	border: none;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-profile .dropdown-item {
+	display: flex;
+	align-items: center;
+	padding: 10px 15px;
+	color: #333;
+	text-decoration: none;
+	transition: background 0.3s;
+}
+
+.nav-profile .dropdown-item:hover {
+	background: #e9ecef;
+}
+
+.nav-profile .dropdown-item i {
+	margin-right: 10px;
+	font-size: 18px;
+}
+
+.nav-profile .dropdown-header {
+	text-align: center;
+	padding: 10px 15px;
+}
+
+.nav-profile .dropdown-divider {
+	margin: 5px 0;
+}
 </style>
 </head>
 <body class="goto-here">
 
-	 <nav
-        class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
-        id="ftco-navbar">
-        <div class="container">
-            <a class="navbar-brand" href="index">Vegefoods</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse"
-                data-target="#ftco-nav" aria-controls="ftco-nav"
-                aria-expanded="false" aria-label="Toggle navigation">
-                <span class="oi oi-menu"></span> Menu
-            </button>
+		<nav
+		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
+		id="ftco-navbar">
+		<div class="container">
+			<a class="navbar-brand" href="index">Vegefoods</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#ftco-nav" aria-controls="ftco-nav"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="oi oi-menu"></span> Menu
+			</button>
 
-            <div class="collapse navbar-collapse" id="ftco-nav">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active"><a href="index"
-                        class="nav-link">Home</a></li>
-                    <li class="nav-item dropdown"><a
-                        class="nav-link dropdown-toggle" href="#" id="dropdown04"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown04">
-                            <a class="dropdown-item" href="product">Shop</a> <a
-                                class="dropdown-item" href="wishlist.html">Wishlist</a> <a
-                                class="dropdown-item" href="ProductSingle.jsp">Single
-                                Product</a> <a class="dropdown-item" href="cart">Cart</a> <a
-                                class="dropdown-item" href="checkout.html">Checkout</a>
-                        </div></li>
-                    <li class="nav-item"><a href="About.jsp" class="nav-link">About</a></li>
-                    <li class="nav-item"><a href="Blog.jsp" class="nav-link">Blog</a></li>
-                    <li class="nav-item"><a href="Contact.jsp" class="nav-link">Contact</a></li>
-                </ul>
-                <form class="form-inline my-2 my-lg-0 mx-auto search-form" onsubmit="return false;">
-                    <input class="form-control search-input" type="search" id="search-query"
-                        placeholder="Bạn muốn chọn ăn gì?" aria-label="Search" onkeyup="searchProducts()">
-                    <button class="btn search-button" type="submit">
-                        <i class="fas fa-search"></i>
-                    </button>
-                    <div id="search-results">
-                        <ul style="border-radius: 20px;"></ul>
-                    </div>
-                </form>
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item cta cta-colored"><a href="cart"
-                        class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
-                    <li class="nav-item"><a href="Login.jsp" class="nav-link"><i
-                            class="fas fa-sign-in-alt"></i> Login</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+			<div class="collapse navbar-collapse" id="ftco-nav">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active"><a href="index" class="nav-link">Home</a></li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" id="dropdown04"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
+						<div class="dropdown-menu" aria-labelledby="dropdown04">
+							<a class="dropdown-item" href="product">Shop</a> <a
+								class="dropdown-item" href="wishlist.html">Wishlist</a> <a
+								class="dropdown-item" href="ProductSingle.jsp">Single
+								Product</a> <a class="dropdown-item" href="Cart.jsp">Cart</a> <a
+								class="dropdown-item" href="checkout.html">Checkout</a>
+						</div></li>
+					<li class="nav-item"><a href="About.jsp" class="nav-link">About</a></li>
+					<li class="nav-item"><a href="Blog.jsp" class="nav-link">Blog</a></li>
+					<li class="nav-item"><a href="Contact.jsp" class="nav-link">Contact</a></li>
+				</ul>
+				<form class="form-inline my-2 my-lg-0 mx-auto search-form"
+					onsubmit="return false;">
+					<input class="form-control search-input" type="search"
+						id="search-query" placeholder="Bạn muốn chọn ăn gì?"
+						aria-label="Search" onkeyup="searchProducts()">
+					<button class="btn search-button" type="submit">
+						<i class="fas fa-search"></i>
+					</button>
+					<div id="search-results">
+						<ul style="border-radius: 20px;"></ul>
+					</div>
+				</form>
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item cta cta-colored">
+    <a href="cart" class="nav-link">
+        <span class="icon-shopping_cart"></span>
+        [<c:out value="${totalItems}" />]
+    </a>
+</li>
+
+					<c:if test="${sessionScope.acc != null}">
+						<li class="nav-item dropdown pe-3 nav-profile"><a
+							class="nav-link nav-profile d-flex align-items-center pe-0"
+							href="#" data-bs-toggle="dropdown"> <img
+								src="images/profile-img.jpg" alt="Profile"
+								class="rounded-circle"> <span style="margin-left: 10px"
+								class="d-none d-md-block dropdown-toggle ps-2"> <c:set
+										var="email" value="${sessionScope.acc.email}" /> <c:out
+										value="${fn:substringBefore(email, '@')}" />
+							</span>
+						</a>
+							<ul
+								class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+								<li class="dropdown-header">
+									<h6>
+										<c:out value="${fn:substringBefore(email, '@')}" />
+									</h6> <span> <c:choose>
+											<c:when test="${sessionScope.acc.admin}">
+                                                Admin
+                                            </c:when>
+											<c:when test="${sessionScope.acc.sell}">
+                                                Bán hàng
+                                            </c:when>
+											<c:otherwise>
+                                                Khách hàng
+                                            </c:otherwise>
+										</c:choose>
+								</span>
+								</li>
+
+								<c:if test="${sessionScope.acc.admin == true}">
+									<li><hr class="dropdown-divider"></li>
+									<li><a class="dropdown-item d-flex align-items-center"
+										href="Admin.jsp"> <svg xmlns="http://www.w3.org/2000/svg"
+												width="16" height="16" fill="currentColor"
+												class="bi bi-people" viewBox="0 0 16 16">
+  <path
+													d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1zm-7.978-1L7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0M6.936 9.28a6 6 0 0 0-1.23-.247A7 7 0 0 0 5 9c-4 0-5 3-5 4q0 1 1 1h4.216A2.24 2.24 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816M4.92 10A5.5 5.5 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4" />
+</svg> <span style="margin-left: 8px">Trang quản lý</span>
+									</a></li>
+								</c:if>
+
+
+								<c:if test="${sessionScope.acc.sell == true}">
+									<li><hr class="dropdown-divider"></li>
+									<li><a class="dropdown-item d-flex align-items-center"
+										href="Admin.jsp"> <svg xmlns="http://www.w3.org/2000/svg"
+												width="16" height="16" fill="currentColor"
+												class="bi bi-basket3" viewBox="0 0 16 16">
+  <path
+													d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 .5 6h1.717L5.07 1.243a.5.5 0 0 1 .686-.172zM3.394 15l-1.48-6h-.97l1.525 6.426a.75.75 0 0 0 .729.574h9.606a.75.75 0 0 0 .73-.574L15.056 9h-.972l-1.479 6z" />
+</svg> <span style="margin-left: 8px">Trang quản lý</span>
+									</a></li>
+
+								</c:if>
+
+
+								<li><hr class="dropdown-divider"></li>
+								<li><a class="dropdown-item d-flex align-items-center"
+									href="users-profile.html"> <svg
+											xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+											fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+  <path
+												d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0" />
+  <path
+												d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z" />
+</svg> <span style="margin-left: 8px">Account Settings</span>
+								</a></li>
+								<li><hr class="dropdown-divider"></li>
+								<li><a class="dropdown-item d-flex align-items-center"
+									href="pages-faq.html"> <svg
+											xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+											fill="currentColor" class="bi bi-question-circle"
+											viewBox="0 0 16 16">
+  <path
+												d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+  <path
+												d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286m1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94" />
+</svg> <span style="margin-left: 8px">Need Help?</span>
+								</a></li>
+								<li><hr class="dropdown-divider"></li>
+								<li><a class="dropdown-item d-flex align-items-center"
+									href="logout"> <svg xmlns="http://www.w3.org/2000/svg"
+											width="16" height="16" fill="currentColor"
+											class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd"
+												d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
+  <path fill-rule="evenodd"
+												d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
+</svg> <span style="margin-left: 8px"> Sign Out</span>
+								</a></li>
+							</ul></li>
+					</c:if>
+					<c:if test="${sessionScope.acc == null}">
+						<li class="nav-item"><a href="Login.jsp" class="nav-link">
+								<i class="fas fa-sign-in-alt"></i> Login
+						</a></li>
+					</c:if>
+				</ul>
+			</div>
+		</div>
+	</nav>
 	<!-- END nav -->
 
 	<div class="hero-wrap hero-bread"
@@ -223,6 +369,7 @@
 			</div>
 		</div>
 	</div>
+	
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row justify-content-center">
@@ -262,10 +409,13 @@
 										<a href="productDetail?productId=${product.maSP}"
 											class="add-to-cart d-flex justify-content-center align-items-center text-center">
 											<span><i class="ion-ios-menu"></i></span>
-										</a> <a href="#"
-											class="buy-now d-flex justify-content-center align-items-center mx-1">
-											<span><i class="ion-ios-cart"></i></span>
-										</a> <a href="#"
+										</a> 
+										<a href="#"
+													class="buy-now d-flex justify-content-center align-items-center mx-1"
+													onclick="addToCart(event, '${product.maSP}')"> <span><i
+														class="ion-ios-cart"></i></span>
+												</a>
+										 <a href="#"
 											class="heart d-flex justify-content-center align-items-center">
 											<span><i class="ion-ios-heart"></i></span>
 										</a>
@@ -471,5 +621,28 @@ function searchProducts() {
     }
 }
 </script>
+	<script>
+		function addToCart(event, maSP) {
+			event.preventDefault(); // Ngăn không cho trang tải lại
+			$.ajax({
+				url : 'addToCart',
+				type : 'GET',
+				data : {
+					maSP : maSP,
+					amount : 1
+				},
+				success : function(response) {
+					// Xử lý kết quả thành công
+					alert('Product added to cart successfully!');
+					// Cập nhật số lượng sản phẩm trong giỏ hàng (nếu cần thiết)
+					$('#cart-count').text(response.totalItems); // Giả sử bạn có một phần tử với id "cart-count" để hiển thị số lượng sản phẩm trong giỏ hàng
+				},
+				error : function(xhr, status, error) {
+					// Xử lý kết quả lỗi
+					alert('Error adding product to cart!');
+				}
+			});
+		}
+	</script>
 </body>
 </html>
