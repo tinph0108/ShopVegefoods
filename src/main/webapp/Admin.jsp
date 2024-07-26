@@ -109,7 +109,7 @@
                 </span> 
             </a></span></li>
 
-            <li><a href="invoice.html" class="collapsed">
+            <li><a href="orderlist" class="collapsed">
                 <span class="menu-bar__text"> 
                     <span class="sherah-menu-icon sherah-svg-icon__v1"> 
                         <svg class="sherah-svg-icon" xmlns="http://www.w3.org/2000/svg" width="19.434" height="19.432" viewBox="0 0 19.434 19.432">
@@ -122,7 +122,7 @@
                             </g>
                         </svg>
                     </span> 
-                    <span class="menu-bar__name">Invoice</span>
+                    <span class="menu-bar__name">Order</span>
                 </span> 
             </a></span></li>
 

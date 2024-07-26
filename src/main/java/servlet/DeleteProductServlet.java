@@ -28,10 +28,10 @@ public class DeleteProductServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String piad = request.getParameter("pid");
-		ProductDAO dao = new ProductDAO();
-		dao.deleteProduct(piad);
-		response.sendRedirect("manager");
+		 String pid = request.getParameter("pid");
+	        ProductDAO dao = new ProductDAO();
+	        dao.deleteProduct(pid);
+	        response.sendRedirect("manager");
 	}
 
 	/**

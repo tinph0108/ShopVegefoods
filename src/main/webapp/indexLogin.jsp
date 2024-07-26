@@ -215,11 +215,10 @@
 						class="nav-link dropdown-toggle" href="#" id="dropdown04"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
 						<div class="dropdown-menu" aria-labelledby="dropdown04">
-							<a class="dropdown-item" href="product">Shop</a> <a
-								class="dropdown-item" href="wishlist.html">Wishlist</a> <a
+							<a class="dropdown-item" href="product">Shop</a>  <a
 								class="dropdown-item" href="ProductSingle.jsp">Single
-								Product</a> <a class="dropdown-item" href="Cart.jsp">Cart</a> <a
-								class="dropdown-item" href="checkout.html">Checkout</a>
+								Product</a> <a class="dropdown-item" href="cart">Cart</a> <a
+								class="dropdown-item" href="Checkout.jsp">Checkout</a>
 						</div></li>
 					<li class="nav-item"><a href="About.jsp" class="nav-link">About</a></li>
 					<li class="nav-item"><a href="Blog.jsp" class="nav-link">Blog</a></li>

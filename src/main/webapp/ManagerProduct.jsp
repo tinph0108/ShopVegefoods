@@ -98,10 +98,14 @@ img {
 							<td>${o.giaBan}VND</td>
 							<td><a href="loadProduct?pid=${o.maSP}" class="edit"
 								data-toggle="modal"><i class="material-icons"
-									data-toggle="tooltip" title="Edit">&#xE254;</i></a> <a href="#"
-								onclick="confirmDelete('deleteProduct?pid=${o.maSP}')"
-								class="delete"><i class="material-icons"
-									data-toggle="tooltip" title="Delete">&#xE872;</i></a></td>
+									data-toggle="tooltip" title="Edit">&#xE254;</i></a> 
+									
+									<a href="#" onclick="confirmDelete('deleteProduct?pid=${o.maSP}')" class="delete">
+    <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
+</a>
+
+									
+									</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -332,11 +336,12 @@ img {
 
 	<script src="js/manager.js" type="text/javascript"></script>
 	<script>
-		function confirmDelete(url) {
-			if (confirm("Are you sure you want to delete this product?")) {
-				window.location.href = url;
-			}
-		}
-	</script>
+    function confirmDelete(url) {
+        if (confirm("Are you sure you want to delete this product?")) {
+            window.location.href = url;
+        }
+    }
+</script>
+
 </body>
 </html>

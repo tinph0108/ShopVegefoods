@@ -3,9 +3,9 @@ package Test;
 import java.util.List;
 
 import dao.DanhMucDAO;
+import dao.OrderDAO;
 import dao.ProductDAO;
-import entity.DanhMuc;
-import entity.Product;
+import entity.Order;
 
 public class MainTest {
 	public static void main(String[] args) {
@@ -50,7 +50,10 @@ public class MainTest {
 //            System.out.println(product);
 //		}
 		
-		
+		List<Order> listOrder = new OrderDAO().listAllOrders();
+		for (Order order : listOrder) {
+            System.out.println(order);
+		}
 		
 	}
 }

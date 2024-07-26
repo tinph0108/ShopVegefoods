@@ -221,11 +221,10 @@
 						class="nav-link dropdown-toggle" href="#" id="dropdown04"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
 						<div class="dropdown-menu" aria-labelledby="dropdown04">
-							<a class="dropdown-item" href="product">Shop</a> <a
-								class="dropdown-item" href="wishlist.html">Wishlist</a> <a
-								class="dropdown-item" href="ProductSingle.jsp">Single
-								Product</a> <a class="dropdown-item" href="Cart.jsp">Cart</a> <a
-								class="dropdown-item" href="checkout.html">Checkout</a>
+							<a class="dropdown-item" href="product">Shop</a><a
+								class="dropdown-item" href="#">Single
+								Product</a> <a class="dropdown-item" href="cart">Cart</a> <a
+								class="dropdown-item" href="Checkout.jsp">Checkout</a>
 						</div></li>
 					<li class="nav-item"><a href="About.jsp" class="nav-link">About</a></li>
 					<li class="nav-item"><a href="Blog.jsp" class="nav-link">Blog</a></li>
@@ -507,15 +506,16 @@
 				<div class="col-md">
 					<div class="ftco-footer-widget mb-4">
 						<h2 class="ftco-heading-2">Vegefoods</h2>
-						<p>Far far away, behind the word mountains, far from the
-							countries Vokalia and Consonantia.</p>
+						<p>Rau sạch, tươi ngon từ trang trại đến bàn ăn của bạn!</p>
 						<ul
 							class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
 							<li class="ftco-animate"><a href="#"><span
 									class="icon-twitter"></span></a></li>
-							<li class="ftco-animate"><a href="#"><span
+							<li class="ftco-animate"><a
+								href="https://www.facebook.com/sniT.18"><span
 									class="icon-facebook"></span></a></li>
-							<li class="ftco-animate"><a href="#"><span
+							<li class="ftco-animate"><a
+								href="https://www.instagram.com/s1mpel8"><span
 									class="icon-instagram"></span></a></li>
 						</ul>
 					</div>
@@ -524,8 +524,8 @@
 					<div class="ftco-footer-widget mb-4 ml-md-5">
 						<h2 class="ftco-heading-2">Menu</h2>
 						<ul class="list-unstyled">
-							<li><a href="#" class="py-2 d-block">Shop</a></li>
-							<li><a href="#" class="py-2 d-block">About</a></li>
+							<li><a href="Shop.jsp" class="py-2 d-block">Shop</a></li>
+							<li><a href="About.jsp" class="py-2 d-block">About</a></li>
 							<li><a href="#" class="py-2 d-block">Journal</a></li>
 							<li><a href="#" class="py-2 d-block">Contact Us</a></li>
 						</ul>
@@ -557,12 +557,12 @@
 						<div class="block-23 mb-3">
 							<ul>
 								<li><span class="icon icon-map-marker"></span><span
-									class="text">203 Fake St. Mountain View, San Francisco,
-										California, USA</span></li>
+									class="text">12 Nguyễn Văn Bảo, Phường 4, Gò Vấp, Hồ Chí
+										Minh</span></li>
 								<li><a href="#"><span class="icon icon-phone"></span><span
-										class="text">+2 392 3929 210</span></a></li>
+										class="text">+84 327 858 843</span></a></li>
 								<li><a href="#"><span class="icon icon-envelope"></span><span
-										class="text">info@yourdomain.com</span></a></li>
+										class="text">tinphan924@gmail.com</span></a></li>
 							</ul>
 						</div>
 					</div>
@@ -570,6 +570,7 @@
 			</div>
 			<div class="row">
 				<div class="col-md-12 text-center">
+
 					<p>
 						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 						Copyright &copy;
@@ -585,6 +586,7 @@
 			</div>
 		</div>
 	</footer>
+
 
 	<!-- loader -->
 	<div id="ftco-loader" class="show fullscreen">
