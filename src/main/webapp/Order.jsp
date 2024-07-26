@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
@@ -7,10 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Order Management</title>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <style>
 body {
 	font-family: Arial, sans-serif;
@@ -157,8 +154,7 @@ body {
 										</ul>
 									</div>
 									<!-- End Sherah Breadcrumb -->
-									<a href="order-details" class="sherah-btn sherah-gbcolor">Add
-										New Order</a>
+								
 								</div>
 							</div>
 							<div
@@ -192,7 +188,8 @@ body {
 													<div class="action-icons">
 														<a href="editOrder?id=${order.orderID}"
 															class="action-btn edit-btn"> <i class="fas fa-edit"></i>
-															<a href="orderdetails?orderID=${order.orderID}"
+														</a>
+														<a href="orderdetails?orderID=${order.orderID}"
 															class="sherah-table__action sherah-color2 sherah-color3__bg--opactity">
 																<i class="fas fa-eye"></i>
 														</a>
