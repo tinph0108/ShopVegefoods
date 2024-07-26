@@ -171,4 +171,30 @@ public class OrderDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	public double getTotalSales() {
+        double totalSales = 0;
+        String sql = "SELECT SUM(totalAmount) AS TotalSales FROM [Order]";
+        try (Connection conn = ConnectDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                totalSales = rs.getDouble("TotalSales");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return totalSales;
+    }
+	public int getRecentOrders() {
+        int recentOrders = 0;
+        String sql = "SELECT COUNT(*) AS RecentOrders FROM [Order] WHERE orderDate > DATEADD(DAY, -7, GETDATE())";
+        try (Connection conn = ConnectDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                recentOrders = rs.getInt("RecentOrders");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return recentOrders;
+    }
+	
 }

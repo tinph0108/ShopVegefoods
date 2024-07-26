@@ -465,7 +465,7 @@
 									<h2>Vegetables</h2>
 									<p>Protect the health of every home</p>
 									<p>
-										<a href="Shop.jsp" class="btn btn-primary">Shop now</a>
+										<a href="product" class="btn btn-primary">Shop now</a>
 									</p>
 								</div>
 							</div>
